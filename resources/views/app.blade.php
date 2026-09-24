@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1>hello</h1>
+    <a href="{{route('products.index')}}">INDEX</a>
 </body>
 </html>
