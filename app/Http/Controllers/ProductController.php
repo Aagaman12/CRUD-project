@@ -27,15 +27,15 @@ class ProductController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:100',
             'sku' => 'required|unique:products,sku|max:100',
-            'description' => 'nullable|string|max:500',                     //validating the data.
+            'description' => 'nullable|string|max:500',                     // validating the data.
             'price' => 'required|numeric|min:0|decimal:0,2',
             'quantity' => 'required|integer|min:0',
         ]);
         $data['is_active'] = $request->boolean('is_active');
 
-        Product::create($data);         //stores our data into database
+        Product::create($data);         // stores our data into database
 
-        return redirect(route('products.index'))->with('success', 'Product Created Successfully.');  //after storing redirects to index page.
+        return redirect(route('products.index'))->with('success', 'Product Created Successfully.');  // after storing redirects to index page.
     }
 
     public function show(Product $product): View
@@ -52,8 +52,8 @@ class ProductController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:100',
-            'sku' => ['required', 'max:100', Rule::unique('products', 'sku')->ignore($product->id)],    //while updating the values the right unique values must remain same.
-            'description' => 'nullable|string|max:500',             //validating the updated data.
+            'sku' => ['required', 'max:100', Rule::unique('products', 'sku')->ignore($product->id)],    // while updating the values the right unique values must remain same.
+            'description' => 'nullable|string|max:500',             // validating the updated data.
             'price' => 'required|numeric|min:0|decimal:0,2',
             'quantity' => 'required|integer|min:0',
         ]);
