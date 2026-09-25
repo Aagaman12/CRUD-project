@@ -10,7 +10,6 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-
     // Task 1
 
     public function index(): View
@@ -43,7 +42,7 @@ class ProductController extends Controller
 
     public function show(Product $product): View
     {
-        return view('products.show', compact('product'));       
+        return view('products.show', compact('product'));
     }
 
     public function edit(Product $product): View
@@ -76,7 +75,8 @@ class ProductController extends Controller
 
     // Task 2
 
-    public function search(Request $request) {          // logic of searching products, sorting and pagination.
+    public function search(Request $request)          // logic of searching products, sorting and pagination.
+    {
         $search = $request->query('search');
 
         $sort = $request->query('sort');
@@ -84,22 +84,20 @@ class ProductController extends Controller
 
         $allowedSorts = ['name', 'price', 'quantity', 'created_at'];
 
-    if (!in_array($sort, $allowedSorts)) {
-        $sort = 'id';
-    }
+        if (! in_array($sort, $allowedSorts)) {
+            $sort = 'id';
+        }
 
-    if (!in_array($direction, ['asc', 'desc'])) {
-        $direction = 'asc';
-    }
+        if (! in_array($direction, ['asc', 'desc'])) {
+            $direction = 'asc';
+        }
 
-        $products = Product::where('name','LIKE',"%{$search}%")
-        ->orWhere('sku', 'like', "%{$search}%")
-        ->orderBy($sort, $direction)
-        ->simplePaginate(10)
-        ->withQueryString();
+        $products = Product::where('name', 'LIKE', "%{$search}%")
+            ->orWhere('sku', 'like', "%{$search}%")
+            ->orderBy($sort, $direction)
+            ->simplePaginate(10)
+            ->withQueryString();
+
         return view('products.index', compact('products'));
     }
-
- 
-
 }
