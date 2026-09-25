@@ -75,7 +75,7 @@ class ProductController extends Controller
 
     // Task 2
 
-    public function search(Request $request)          // logic of searching products, sorting and pagination.
+    public function search(Request $request): View        // logic of searching products, sorting and pagination.
     {
         $search = $request->query('search');
 
@@ -92,11 +92,7 @@ class ProductController extends Controller
             $direction = 'asc';
         }
 
-        $products = Product::where('name', 'LIKE', "%{$search}%")
-            ->orWhere('sku', 'like', "%{$search}%")
-            ->orderBy($sort, $direction)
-            ->simplePaginate(10)
-            ->withQueryString();
+        $products = Product::where('name', 'LIKE', "%{$search}%")->orWhere('sku', 'like', "%{$search}%")->orderBy($sort, $direction)->simplePaginate(10)->withQueryString();
 
         return view('products.index', compact('products'));
     }
