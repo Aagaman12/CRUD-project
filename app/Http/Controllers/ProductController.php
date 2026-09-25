@@ -77,22 +77,22 @@ class ProductController extends Controller
 
     public function search(Request $request): View        // logic of searching products, sorting and pagination.
     {
-        $search = $request->query('search');
+        $search = $request->query('search', '');
 
         $sort = $request->query('sort');
-        $direction = $request->query('direction');
+        $direction = (string) $request->query('direction');
 
         $allowedSorts = ['name', 'price', 'quantity', 'created_at'];
 
         if (! in_array($sort, $allowedSorts)) {
-            $sort = 'id';
+            $sort = 'name';
         }
 
         if (! in_array($direction, ['asc', 'desc'])) {
             $direction = 'asc';
         }
 
-        $products = Product::where('name', 'LIKE', "%{$search}%")->orWhere('sku', 'like', "%{$search}%")->orderBy($sort, $direction)->simplePaginate(10)->withQueryString();
+        $products = Product::where('name', 'LIKE', "%{$search}%")->orWhere('sku', 'like', "%{$search}%")->orderBy($sort, $direction)->paginate(10)->withQueryString();
 
         return view('products.index', compact('products'));
     }
