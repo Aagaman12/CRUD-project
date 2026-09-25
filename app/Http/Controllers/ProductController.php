@@ -11,7 +11,7 @@ use Illuminate\View\View;
 class ProductController extends Controller
 {
 
-    //Task 1
+    // Task 1
 
     public function index(): View
     {
@@ -74,7 +74,7 @@ class ProductController extends Controller
         return redirect(route('products.index'))->with('success', 'Product deleted successfully');
     }
 
-    //Task 2
+    // Task 2
 
     public function search(Request $request) {          // logic of searching products, sorting and pagination.
         $search = $request->query('search');
@@ -85,11 +85,11 @@ class ProductController extends Controller
         $allowedSorts = ['name', 'price', 'quantity', 'created_at'];
 
     if (!in_array($sort, $allowedSorts)) {
-        $sort = 'created_at';
+        $sort = 'id';
     }
 
     if (!in_array($direction, ['asc', 'desc'])) {
-        $direction = 'desc';
+        $direction = 'asc';
     }
 
         $products = Product::where('name','LIKE',"%{$search}%")
