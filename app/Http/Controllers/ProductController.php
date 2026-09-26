@@ -85,7 +85,7 @@ class ProductController extends Controller
         $allowedSorts = ['name', 'price', 'quantity', 'created_at'];
 
         if (! in_array($sort, $allowedSorts)) {
-            $sort = 'name';
+            $sort = 'id';
         }
 
         if (! in_array($direction, ['asc', 'desc'])) {

@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
+@section('title', 'Index Page')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <h1>Product Index</h1>
+@section('content')
+    
+<h1>Product Index</h1>
 
     <div>
         <a href="{{route('products.create')}}">CREATE A PRODUCT</a>
@@ -31,7 +26,7 @@
             <input type="submit" value="Search" />
 
             <select name="sort">
-                <option value="sort" selected hidden>Sort By</option>
+                <option value="sort" @selected(!request('sort'))>Sort By</option>
                 <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Name</option>
                 <option value="price" {{ request('sort') == 'price' ? 'selected' : '' }}>Price</option>
                 <option value="quantity" {{ request('sort') == 'quantity' ? 'selected' : '' }}>Quantity</option>
@@ -106,6 +101,6 @@
             }
         </style>
     </div>
-</body>
 
-</html>
+    
+@endsection
