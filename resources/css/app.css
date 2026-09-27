@@ -11,50 +11,92 @@
 }
 
 @theme {
-  --color-primary: #b70011;
-  --color-primary-container: #dc2626;
-  --color-on-primary: #ffffff;
-  --color-on-primary-container: #fff6f5;
-  --color-secondary: #b02d29;
-  --color-on-secondary: #ffffff;
-  --color-secondary-container: #ff665c;
-  --color-tertiary: #005e8d;
-  --color-on-tertiary-container: #f3f8ff;
-  --color-surface: #fbf8fc;
-  --color-surface-dim: #dcd9dd;
-  --color-surface-bright: #fbf8fc;
-  --color-surface-variant: #e4e1e6;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f6f2f7;
-  --color-surface-container: #f0edf1;
-  --color-surface-container-high: #eae7eb;
-  --color-surface-container-highest: #e4e1e6;
-  --color-background: #fbf8fc;
-  --color-on-background: #1b1b1e;
-  --color-on-surface: #1b1b1e;
-  --color-on-surface-variant: #5c403c;
-  --color-outline: #916f6b;
-  --color-outline-variant: #e6bdb8;
-  --color-error: #ba1a1a;
-  --color-error-container: #ffdad6;
-  --color-on-error: #ffffff;
-  --color-on-error-container: #93000a;
+    --color-primary: #b70011;
+    --color-primary-container: #dc2626;
+    --color-on-primary: #ffffff;
+    --color-on-primary-container: #fff6f5;
+    --color-secondary: #b02d29;
+    --color-on-secondary: #ffffff;
+    --color-secondary-container: #ff665c;
+    --color-tertiary: #005e8d;
+    --color-on-tertiary-container: #f3f8ff;
+    --color-surface: #fbf8fc;
+    --color-surface-dim: #dcd9dd;
+    --color-surface-bright: #fbf8fc;
+    --color-surface-variant: #e4e1e6;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #f6f2f7;
+    --color-surface-container: #f0edf1;
+    --color-surface-container-high: #eae7eb;
+    --color-surface-container-highest: #e4e1e6;
+    --color-background: #fbf8fc;
+    --color-on-background: #1b1b1e;
+    --color-on-surface: #1b1b1e;
+    --color-on-surface-variant: #5c403c;
+    --color-outline: #916f6b;
+    --color-outline-variant: #e6bdb8;
+    --color-error: #ba1a1a;
+    --color-error-container: #ffdad6;
+    --color-on-error: #ffffff;
+    --color-on-error-container: #93000a;
 
-  --spacing-space-xs: 0.25rem;
-  --spacing-space-sm: 0.5rem;
-  --spacing-space-md: 1rem;
-  --spacing-space-lg: 1.5rem;
-  --spacing-space-xl: 2.5rem;
-  --spacing-gutter: 1.5rem;
-  --spacing-margin: 2rem;
+    --spacing-space-xs: 0.25rem;
+    --spacing-space-sm: 0.5rem;
+    --spacing-space-md: 1rem;
+    --spacing-space-lg: 1.5rem;
+    --spacing-space-xl: 2.5rem;
+    --spacing-gutter: 1.5rem;
+    --spacing-margin: 2rem;
 }
 
-.text-display-lg { font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.02em; font-weight: 700; }
-.text-headline-lg { font-size: 1.75rem; line-height: 2.25rem; letter-spacing: -0.015em; font-weight: 600; }
-.text-headline-md { font-size: 1.25rem; line-height: 1.625rem; letter-spacing: -0.01em; font-weight: 600; }
-.text-body-lg { font-size: 1rem; line-height: 1.5rem; font-weight: 400; }
-.text-body-md { font-size: 0.875rem; line-height: 1.375rem; font-weight: 400; }
-.text-body-sm { font-size: 0.75rem; line-height: 1.125rem; font-weight: 400; }
-.text-label-lg { font-size: 0.875rem; line-height: 1.25rem; letter-spacing: 0.01em; font-weight: 500; }
-.text-label-md { font-size: 0.75rem; line-height: 1rem; letter-spacing: 0.02em; font-weight: 500; }
-.text-label-sm { font-size: 0.6875rem; line-height: 0.875rem; letter-spacing: 0.04em; font-weight: 600; }
+.text-display-lg {
+    font-size: 2.25rem;
+    line-height: 2.75rem;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.text-headline-lg {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+}
+.text-headline-md {
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+}
+.text-body-lg {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+}
+.text-body-md {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+}
+.text-body-sm {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+    font-weight: 400;
+}
+.text-label-lg {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.01em;
+    font-weight: 500;
+}
+.text-label-md {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+}
+.text-label-sm {
+    font-size: 0.6875rem;
+    line-height: 0.875rem;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
