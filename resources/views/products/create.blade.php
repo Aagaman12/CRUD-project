@@ -103,19 +103,19 @@
                         class="relative rounded-xl bg-surface-container-low p-space-lg flex flex-col items-center justify-center text-center gap-space-sm">
                         <input type="file" name="image" accept="image/*" id="imageInput"
                             class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="
-               const file = this.files[0];
-               if (file) {
-                   const reader = new FileReader();
-                   reader.onload = function(e) {
-                       const preview = document.getElementById('imgPreview');
-                       const placeholder = document.getElementById('uploadPlaceholder');
-                       preview.src = e.target.result;
-                       preview.classList.remove('hidden');
-                       placeholder.classList.add('hidden');
-                   };
-                   reader.readAsDataURL(file);
-               }
-           " />
+                   const file = this.files[0];
+                   if (file) {
+                       const reader = new FileReader();
+                       reader.onload = function(e) {
+                           const preview = document.getElementById('imgPreview');
+                           const placeholder = document.getElementById('uploadPlaceholder');
+                           preview.src = e.target.result;
+                           preview.classList.remove('hidden');
+                           placeholder.classList.add('hidden');
+                       };
+                       reader.readAsDataURL(file);
+                   }
+               " />
                         <div id="uploadPlaceholder" class="flex flex-col items-center gap-space-xs">
                             <div
                                 class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
