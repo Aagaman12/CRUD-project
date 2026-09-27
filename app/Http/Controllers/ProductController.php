@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -27,12 +28,18 @@ class ProductController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
+            'image' => 'nullable|image|max:2048',
             'name' => 'required|string|max:100',
             'sku' => 'required|unique:products,sku|max:100',
             'description' => 'nullable|string|max:500',                                             // validating the data.
             'price' => 'required|numeric|min:0|decimal:0,2',
             'quantity' => 'required|integer|min:0',
         ]);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+
         $data['is_active'] = $request->boolean('is_active');
 
         Product::create($data);         // stores our data into database.
@@ -53,12 +60,21 @@ class ProductController extends Controller
     public function update(Product $product, Request $request): RedirectResponse
     {
         $data = $request->validate([
+            'image' => 'nullable|image|max:2048',
             'name' => 'required|string|max:100',
             'sku' => ['required', 'max:100', Rule::unique('products', 'sku')->ignore($product->id)],    // lets unique values remain same.
             'description' => 'nullable|string|max:500',                                                 // validating the updated data.
             'price' => 'required|numeric|min:0|decimal:0,2',
             'quantity' => 'required|integer|min:0',
         ]);
+
+         if ($request->hasFile('image')) {
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+        $data['image'] = $request->file('image')->store('products', 'public');
+    }
+
         $data['is_active'] = $request->boolean('is_active');
 
         $product->update($data);
@@ -68,6 +84,9 @@ class ProductController extends Controller
 
     public function delete(Product $product): RedirectResponse
     {
+        if ($product->image) {
+        Storage::disk('public')->delete($product->image);
+    }
         $product->delete();
 
         return redirect(route('products.index'))->with('success', 'Product deleted successfully');
@@ -84,11 +103,11 @@ class ProductController extends Controller
 
         $allowedSorts = ['name', 'price', 'quantity', 'created_at'];
 
-        if (! in_array($sort, $allowedSorts)) {
+        if (!in_array($sort, $allowedSorts)) {
             $sort = 'id';
         }
 
-        if (! in_array($direction, ['asc', 'desc'])) {
+        if (!in_array($direction, ['asc', 'desc'])) {
             $direction = 'asc';
         }
 

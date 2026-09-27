@@ -2,8 +2,8 @@
 @section('title', 'Index Page')
 
 @section('content')
-    
-<h1>Product Index</h1>
+
+    <h1 class="text-3xl font-bold text-blue-600">Product Index</h1>
 
     <div>
         <a href="{{route('products.create')}}">CREATE A PRODUCT</a>
@@ -27,15 +27,15 @@
 
             <select name="sort">
                 <option value="sort" @selected(!request('sort'))>Sort By</option>
-                <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Name</option>
-                <option value="price" {{ request('sort') == 'price' ? 'selected' : '' }}>Price</option>
-                <option value="quantity" {{ request('sort') == 'quantity' ? 'selected' : '' }}>Quantity</option>
-                <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>New</option>
+                <option value="name" @selected(request('sort') === 'name')>Name</option>
+                <option value="price" @selected(request('sort') === 'price')>Price</option>
+                <option value="quantity" @selected(request('sort') === 'quantity')>Quantity</option>
+                <option value="created_at" @selected(request('sort') === 'created_at')>New</option>
             </select>
 
             <select name="direction">
-                <option value="asc" {{ request('direction') == 'asc' ? 'selected' : '' }}>Ascending</option>
-                <option value="desc" {{ request('direction') == 'desc' ? 'selected' : '' }}>Descending</option>
+                <option value="asc" @selected(request('direction') === 'asc')>Ascending</option>
+                <option value="desc" @selected(request('direction') === 'desc')>Descending</option>
             </select>
             <button type="submit">Apply</button>
 
@@ -45,9 +45,10 @@
 
 
 
-    <table border="1">
+    <table>
         <tr>
             <th>Id</th>
+            <th>Image</th>
             <th>Name</th>
             <th>Sku</th>
             <th>Description</th>
@@ -63,12 +64,17 @@
         @foreach($products as $product)
             <tr>
                 <td>{{ $product->id }}</td>
+                <td>
+                    @if($product->image)
+                        <img src="{{ asset('storage/' . $product->image) }}" width="60">
+                    @endif
+                </td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->sku }}</td>
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->quantity }}</td>
-                <td>{{ $product->is_active }}</td>
+                <td>{{ $product->is_active ? 'Yes' : 'No' }}</td>
 
                 <td>
                     <a href="{{ route('products.show', ['product' => $product])}}">Show</a>
@@ -92,15 +98,8 @@
 
     <div>
         {{ $products->links() }} <!-- implementing pagination -->
-        <style>
-            .w-5 {
-                display: none;
-            }
-            table{
-                width: 100%;
-            }
-        </style>
+
     </div>
 
-    
+
 @endsection

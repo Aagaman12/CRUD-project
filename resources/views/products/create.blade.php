@@ -3,39 +3,45 @@
 @section('content')
 
 
-    
+
     <h1> Create a product </h1>
 
-    <form method="post" action="{{route('products.store')}}">
+    <form method="post" action="{{route('products.store')}}" enctype="multipart/form-data">
         @csrf
         @method('post')
+
+        <div>
+            <label>Product</label>
+            <input type="file" name="image" accept="image/*" />
+            @include('layouts.product-error', ['name' => 'image'])
+        </div>
 
         <div>
             <label>Name </label>
             <input type="text" placeholder="Name" name="name" value="{{ old('name') }}" />
 
-            @include('layouts.product-error',['name' => 'name'] )
+            @include('layouts.product-error', ['name' => 'name'])
         </div>
 
         <div>
             <label>Sku </label>
             <input type="text" placeholder="Sku" name="sku" value="{{ old('sku') }}" />
 
-            @include('layouts.product-error',['name' => 'sku'] )
+            @include('layouts.product-error', ['name' => 'sku'])
         </div>
 
         <div>
             <label>Description </label>
             <input type="text" placeholder="Description" name="description" value="{{ old('description') }}" />
 
-            @include('layouts.product-error',['name' => 'description'] )
+            @include('layouts.product-error', ['name' => 'description'])
         </div>
 
         <div>
             <label>Price </label>
             <input type="text" name="price" value="{{ old('price') }}" />
 
-            @include('layouts.product-error',['name' => 'price'] )
+            @include('layouts.product-error', ['name' => 'price'])
         </div>
 
         <div>
@@ -58,5 +64,4 @@
 
     </form>
 
-    @endsection
-
+@endsection

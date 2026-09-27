@@ -4,7 +4,9 @@
 
     <h1>Product Details</h1>
    
-
+@if($product->image)
+    <img src="{{ asset('storage/' . $product->image) }}" width="200" alt="{{ $product->name }}">
+@endif
 <p>Name: {{ $product->name }}</p>
 <p>SKU: {{ $product->sku }}</p>
 <p>Description: {{ $product->description }}</p>

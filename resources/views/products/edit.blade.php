@@ -4,11 +4,21 @@
 
     <h1> Update a product </h1>
 
-  
 
-    <form method="post" action="{{ route('products.update', ['product' => $product]) }}">
+
+    <form method="post" action="{{ route('products.update', ['product' => $product]) }}" enctype="multipart/form-data">
         @csrf
         @method('put')
+
+        <div>
+            <label>Product</label>
+            @if($product->image)
+                <img src="{{ asset('storage/' . $product->image) }}" width="100" alt="{{ $product->name }}">
+            @endif
+            <input type="file" name="image" accept="image/*" />
+            @include('layouts.product-error', ['name' => 'image'])
+        </div>
+
         <div>
             <label>Name </label>
             <input type="text" placeholder="Name" name="name" value="{{ $product->name }}" />
