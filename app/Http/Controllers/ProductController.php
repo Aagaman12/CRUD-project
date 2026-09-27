@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -68,12 +68,12 @@ class ProductController extends Controller
             'quantity' => 'required|integer|min:0',
         ]);
 
-         if ($request->hasFile('image')) {
-        if ($product->image) {
-            Storage::disk('public')->delete($product->image);
+        if ($request->hasFile('image')) {
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+            $data['image'] = $request->file('image')->store('products', 'public');
         }
-        $data['image'] = $request->file('image')->store('products', 'public');
-    }
 
         $data['is_active'] = $request->boolean('is_active');
 
@@ -85,8 +85,8 @@ class ProductController extends Controller
     public function delete(Product $product): RedirectResponse
     {
         if ($product->image) {
-        Storage::disk('public')->delete($product->image);
-    }
+            Storage::disk('public')->delete($product->image);
+        }
         $product->delete();
 
         return redirect(route('products.index'))->with('success', 'Product deleted successfully');
@@ -96,22 +96,33 @@ class ProductController extends Controller
 
     public function search(Request $request): View        // logic of searching products, sorting and pagination.
     {
-        $search = $request->query('search', '');
-
-        $sort = $request->query('sort');
-        $direction = (string) $request->query('direction');
+        $search = $request->query('search');
+        $status = $request->query('status');
 
         $allowedSorts = ['name', 'price', 'quantity', 'created_at'];
+        $sort = $request->query('sort');
 
-        if (!in_array($sort, $allowedSorts)) {
+        if (! in_array($sort, $allowedSorts)) {
             $sort = 'id';
         }
 
-        if (!in_array($direction, ['asc', 'desc'])) {
-            $direction = 'asc';
-        }
+        $direction = match ($request->query('direction')) {
+            'desc' => 'desc',
+            default => 'asc',
+        };
 
-        $products = Product::where('name', 'LIKE', "%{$search}%")->orWhere('sku', 'like', "%{$search}%")->orderBy($sort, $direction)->paginate(10)->withQueryString();
+        $products = Product::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhere('sku', 'like', "%{$search}%");
+                });
+            })
+            ->when($status === 'active', fn ($query) => $query->where('is_active', true))
+            ->when($status === 'inactive', fn ($query) => $query->where('is_active', false))
+            ->orderBy($sort, $direction)
+            ->paginate(10)
+            ->withQueryString();
 
         return view('products.index', compact('products'));
     }

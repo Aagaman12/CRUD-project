@@ -37,6 +37,13 @@
                 <option value="asc" @selected(request('direction') === 'asc')>Ascending</option>
                 <option value="desc" @selected(request('direction') === 'desc')>Descending</option>
             </select>
+
+            <select name="status">
+                <option value="" @selected(!request('status'))>All Statuses</option>
+                <option value="active" @selected(request('status') === 'active')>Active</option>
+                <option value="inactive" @selected(request('status') === 'inactive')>Inactive</option>
+            </select>
+
             <button type="submit">Apply</button>
 
         </form>
