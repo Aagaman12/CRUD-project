@@ -47,8 +47,7 @@
                 <span
                     class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container font-semibold">Immediate
                     Dispatch</span>
-                <h2 class="font-headline-lg text-headline-lg text-on-surface">Do you want to view products or create a new
-                    product?</h2>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">Do you want to view or create new products or categories?</h2>
             </div>
             <div class="font-body-md text-body-md text-on-surface-variant">
                 Select a pathway below to proceed to your inventory flow.
@@ -87,7 +86,40 @@
                     </a>
                 </div>
             </div>
-            <!-- Card 2: Create a New Product -->
+
+            <!-- Card 2: View Category Index -->
+
+            <div
+                class="group relative bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200">
+                <div class="flex flex-col gap-space-md">
+                    <div class="flex items-center justify-between">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-on-surface group-hover:bg-primary-container/10 group-hover:text-primary-container transition-colors">
+                            <span class="material-symbols-outlined">inventory_2</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-space-xs">
+                        <h3
+                            class="font-headline-lg text-headline-lg text-on-surface group-hover:text-primary-container transition-colors">
+                            View Category
+                        </h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Browse and inspect your
+                            active categories.</p>
+                    </div>
+                    <!-- Micro Visual Data Strip -->
+                </div>
+                <div class="pt-space-xl mt-space-md">
+                    <a class="inline-flex items-center justify-between w-full px-space-lg py-space-md rounded-lg bg-surface-container-high text-on-surface font-label-lg text-label-lg hover:bg-surface-container-highest transition-colors group-hover:text-primary-container"
+                        href="{{ route('categories.index') }}">
+                        <span class="flex items-center gap-space-sm">
+                            <span class="material-symbols-outlined">table_rows</span>
+                            Browse Categories
+                        </span>
+                        <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
             <div
                 class="group relative bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200">
                 <div class="flex flex-col gap-space-md">
@@ -107,12 +139,46 @@
                     </div>
                     <!-- Micro Visual Feature Points -->
                 </div>
+
                 <div class="pt-space-xl mt-space-md">
                     <a class="inline-flex items-center justify-between w-full px-space-lg py-space-md rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-primary transition-colors shadow-sm"
                         href="{{ route('products.create') }}">
                         <span class="flex items-center gap-space-sm">
                             <span class="material-symbols-outlined">add</span>
                             Create New Product
+                        </span>
+                        <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Card 4: View Category-->
+            <div
+                class="group relative bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200">
+                <div class="flex flex-col gap-space-md">
+                    <div class="flex items-center justify-between">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+                            <span class="material-symbols-outlined">add_box</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-space-xs">
+                        <h3
+                            class="font-headline-lg text-headline-lg text-on-surface group-hover:text-primary-container transition-colors">
+                            Create a New Category
+                        </h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Create Categories based on your
+                            interest
+                        </p>
+                    </div>
+                    <!-- Micro Visual Feature Points -->
+                </div>
+                <div class="pt-space-xl mt-space-md">
+                    <a class="inline-flex items-center justify-between w-full px-space-lg py-space-md rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-primary transition-colors shadow-sm"
+                        href="{{ route('categories.create') }}">
+                        <span class="flex items-center gap-space-sm">
+                            <span class="material-symbols-outlined">add</span>
+                            Create Category
                         </span>
                         <span class="material-symbols-outlined text-base">arrow_forward</span>
                     </a>

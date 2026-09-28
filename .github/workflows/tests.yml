@@ -1,314 +1,44 @@
-Index.blade.php
+name: tests
 
-@extends('layouts.app')
-@section('title', 'Categories')
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
-@section('content')
-    <div class="max-w-7xl mx-auto px-margin py-space-lg">
+permissions:
+  contents: read
 
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
-            <div>
-                <div class="flex items-center gap-space-xs mb-1">
-                    <span class="w-2 h-2 rounded-full bg-primary-container"></span>
-                    <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Inventory
-                        System</span>
-                </div>
-                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Categories</h1>
-            </div>
-            <a href="{{ route('categories.create') }}"
-                class="inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary px-space-lg py-space-sm rounded-lg font-label-lg text-label-lg shadow-sm hover:bg-secondary transition-all active:scale-[0.98]">
-                <span class="material-symbols-outlined text-lg">add</span>
-                <span>CREATE A CATEGORY</span>
-            </a>
-        </div>
+jobs:
+  ci:
+    runs-on: ubuntu-latest
 
-        @if(session()->has('success'))
-            <div
-                class="mb-space-md px-space-md py-space-sm rounded-lg bg-primary-container/10 text-primary-container font-label-md text-label-md">
-                {{ session('success') }}
-            </div>
-        @endif
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-        <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden mb-space-md">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left font-body-md text-body-md">
-                    <thead>
-                        <tr
-                            class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
-                            <th class="py-space-md px-space-md">Id</th>
-                            <th class="py-space-md px-space-md">Name</th>
-                            <th class="py-space-md px-space-md">Description</th>
-                            <th class="py-space-md px-space-md text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-on-surface divide-y divide-surface-variant/20">
-                        @forelse ($categories as $category)
-                            <tr class="hover:bg-surface-container-low transition-colors">
-                                <td
-                                    class="py-space-sm px-space-md font-label-md text-label-md font-medium text-on-surface-variant">
-                                    {{ $category->id }}</td>
-                                <td class="py-space-sm px-space-md font-medium">{{ $category->name }}</td>
-                                <td class="py-space-sm px-space-md text-on-surface-variant max-w-md">
-                                    <p class="line-clamp-2">{{ $category->description }}</p>
-                                </td>
-                                <td class="py-space-sm px-space-md text-center whitespace-nowrap">
-                                    <div class="inline-flex items-center gap-space-xs font-label-sm text-label-sm">
-                                        <a href="{{ route('categories.show', $category) }}"
-                                            class="text-tertiary hover:underline px-1 py-0.5">Show</a>
-                                        <span class="text-surface-container-highest">/</span>
-                                        <a href="{{ route('categories.edit', $category) }}"
-                                            class="text-on-surface-variant hover:text-on-surface px-1 py-0.5">Edit</a>
-                                        <span class="text-surface-container-highest">/</span>
-                                        <form method="post" action="{{ route('categories.destroy', $category) }}"
-                                            class="inline">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit"
-                                                class="text-primary-container hover:text-red-600 px-1 py-0.5 cursor-pointer">Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="py-12 text-center text-on-surface-variant">No categories yet.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
+      - name: Setup PHP
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.5'
+          tools: composer:v2
+          coverage: none
 
-        <div>{{ $categories->links() }}</div>
-    </div>
-@endsection
+      - name: Setup Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '22'
 
+      - name: Setup Application
+        run: composer setup
 
-Create.blade.php
+      - name: Install Node dependencies
+        run: npm install
 
-@extends('layouts.app')
-@section('title', 'Create Page')
+      - name: Build frontend assets
+        run: npm run build
 
-@section('content')
-    <div class="w-full bg-surface-container-lowest shadow-sm mb-space-lg">
-        <div
-            class="max-w-7xl mx-auto px-margin py-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
-            <div class="flex flex-col gap-space-xs">
-                <nav
-                    class="flex items-center gap-space-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
-                    <a href="{{ route('categories.index') }}" class="hover:text-primary transition-colors">Catalog</a>
-                    <span class="text-outline">/</span>
-                    <span class="text-primary font-semibold">New Product</span>
-                </nav>
-                <div class="flex items-center gap-space-sm">
-                    <a href="{{ route('categories.index') }}" title="Back to Categories"
-                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">
-                        <span class="material-symbols-outlined text-lg">arrow_back</span>
-                    </a>
-                    <h1 class="font-headline-lg text-headline-lg text-on-surface">Create a Category</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-margin w-full pb-space-xl">
-        <form method="post" action="{{ route('categories.store') }}"
-            class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
-            @csrf
-
-            <div class="lg:col-span-8 flex flex-col gap-space-lg">
-
-                <div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
-                    <div class="flex items-center gap-space-xs pb-space-xs">
-                        <span class="w-2 h-4 bg-primary-container rounded-sm"></span>
-                        <h2 class="font-headline-md text-headline-md text-on-surface">General Information</h2>
-                    </div>
-
-                    <div class="flex flex-col gap-space-xs">
-                        <label class="font-label-lg text-label-lg text-on-surface">Category Name</label>
-                        <input type="text" name="name" value="{{ old('name') }}" placeholder="e.g. Food"
-                            class="w-full px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-inner transition-colors" />
-                        @include('layouts.product-error', ['name' => 'name'])
-                    </div>
-
-
-
-                    <div class="flex flex-col gap-space-xs">
-                        <label class="font-label-lg text-label-lg text-on-surface">Description</label>
-                        <textarea name="description" rows="5" placeholder="Provide a detailed category description..."
-                            class="w-full px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-inner transition-colors resize-y">{{ old('description') }}</textarea>
-                        @include('layouts.product-error', ['name' => 'description'])
-                    </div>
-                </div>
-
-
-                <div class="flex flex-col gap-space-sm pt-space-md">
-                    <button type="submit"
-                        class="w-full inline-flex items-center justify-center gap-space-xs py-space-sm px-space-md rounded-lg font-label-lg text-label-lg bg-primary-container hover:bg-primary text-on-primary shadow-sm transition-all">
-                        <span class="material-symbols-outlined text-lg">check_circle</span>
-                        Save &amp; Publish Product
-                    </button>
-                    <a href="{{ route('categories.index') }}"
-                        class="w-full inline-flex items-center justify-center py-space-sm px-space-md rounded-lg font-label-lg text-label-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors">
-                        Cancel and Return
-                    </a>
-                </div>
-
-
-
-            </div>
-
-        </form>
-    </div>
-@endsection
-
-Edit.blade.php 
-
-@extends('layouts.app')
-@section('title', 'Edit Category')
-
-@section('content')
-<div class="max-w-3xl mx-auto px-margin py-space-lg">
-    <div class="flex items-center gap-space-sm mb-space-lg">
-        <a href="{{ route('categories.index') }}" title="Back to Categories"
-           class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">
-            <span class="material-symbols-outlined text-lg">arrow_back</span>
-        </a>
-        <h1 class="font-headline-lg text-headline-lg text-on-surface">Update a Category</h1>
-    </div>
-
-    <form method="post" action="{{ route('categories.update', $category) }}"
-          class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
-        @csrf
-        @method('put')
-
-        <div class="flex flex-col gap-space-xs">
-            <label class="font-label-lg text-label-lg text-on-surface">Category Name</label>
-            <input type="text" name="name" value="{{ old('name', $category->name) }}"
-                   class="w-full px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-inner transition-colors" />
-            @include('layouts.product-error', ['name' => 'name'])
-        </div>
-
-        <div class="flex flex-col gap-space-xs">
-            <label class="font-label-lg text-label-lg text-on-surface">Description</label>
-            <textarea name="description" rows="4"
-                      class="w-full px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-inner transition-colors resize-y">{{ old('description', $category->description) }}</textarea>
-            @include('layouts.product-error', ['name' => 'description'])
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-space-sm pt-space-sm">
-            <button type="submit"
-                    class="inline-flex items-center justify-center gap-space-xs py-space-sm px-space-lg rounded-lg font-label-lg text-label-lg bg-primary-container hover:bg-primary text-on-primary shadow-sm transition-all">
-                <span class="material-symbols-outlined text-lg">check_circle</span>
-                Save Changes
-            </button>
-            <a href="{{ route('categories.index') }}"
-               class="inline-flex items-center justify-center py-space-sm px-space-lg rounded-lg font-label-lg text-label-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors">
-                Cancel
-            </a>
-        </div>
-    </form>
-</div>
-@endsection
-
-SHOW.BLADE.PHP
-
-
-@extends('layouts.app')
-@section('title', 'Category Details')
-
-@section('content')
-<div class="max-w-3xl mx-auto px-margin py-space-lg">
-    <div class="flex items-center gap-space-sm mb-space-lg">
-        <a href="{{ route('categories.index') }}" title="Back to Categories"
-           class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">
-            <span class="material-symbols-outlined text-lg">arrow_back</span>
-        </a>
-        <h1 class="font-headline-lg text-headline-lg text-on-surface">{{ $category->name }}</h1>
-    </div>
-
-    <div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
-        <div>
-            <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Description</span>
-            <p class="font-body-md text-body-md text-on-surface mt-1">
-                {{ $category->description ?? 'No description provided.' }}
-            </p>
-        </div>
-
-        <div class="flex gap-space-sm pt-space-sm">
-            <a href="{{ route('categories.edit', $category) }}"
-               class="inline-flex items-center justify-center py-space-sm px-space-lg rounded-lg font-label-lg text-label-lg bg-primary-container hover:bg-primary text-on-primary shadow-sm transition-all">
-                Edit
-            </a>
-        </div>
-    </div>
-</div>
-@endsection
-
-CARD 4
-
-<div
-                class="group relative bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200">
-                <div class="flex flex-col gap-space-md">
-                    <div class="flex items-center justify-between">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
-                            <span class="material-symbols-outlined">add_box</span>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col gap-space-xs">
-                        <h3
-                            class="font-headline-lg text-headline-lg text-on-surface group-hover:text-primary-container transition-colors">
-                            Create a New Category
-                        </h3>
-                        <p class="font-body-md text-body-md text-on-surface-variant">Create Categories based on your
-                            interest
-                        </p>
-                    </div>
-                    <!-- Micro Visual Feature Points -->
-                </div>
-                <div class="pt-space-xl mt-space-md">
-                    <a class="inline-flex items-center justify-between w-full px-space-lg py-space-md rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-primary transition-colors shadow-sm"
-                        href="{{ route('categories.create') }}">
-                        <span class="flex items-center gap-space-sm">
-                            <span class="material-symbols-outlined">add</span>
-                            Create Category
-                        </span>
-                        <span class="material-symbols-outlined text-base">arrow_forward</span>
-                    </a>
-                </div>
-            </div>
-
-<!-- Card 2: View Category Index -->
-
-            <div
-                class="group relative bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200">
-                <div class="flex flex-col gap-space-md">
-                    <div class="flex items-center justify-between">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-on-surface group-hover:bg-primary-container/10 group-hover:text-primary-container transition-colors">
-                            <span class="material-symbols-outlined">inventory_2</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-space-xs">
-                        <h3
-                            class="font-headline-lg text-headline-lg text-on-surface group-hover:text-primary-container transition-colors">
-                            View Category
-                        </h3>
-                        <p class="font-body-md text-body-md text-on-surface-variant">Browse and inspect your
-                            active categories.</p>
-                    </div>
-                    <!-- Micro Visual Data Strip -->
-                </div>
-                <div class="pt-space-xl mt-space-md">
-                    <a class="inline-flex items-center justify-between w-full px-space-lg py-space-md rounded-lg bg-surface-container-high text-on-surface font-label-lg text-label-lg hover:bg-surface-container-highest transition-colors group-hover:text-primary-container"
-                        href="{{ route('categories.index') }}">
-                        <span class="flex items-center gap-space-sm">
-                            <span class="material-symbols-outlined">table_rows</span>
-                            Browse Categories
-                        </span>
-                        <span class="material-symbols-outlined text-base">arrow_forward</span>
-                    </a>
-                </div>
-            </div>
+      - name: Run CI Checks
+        run: composer ci:check
