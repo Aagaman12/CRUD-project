@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,7 @@ Route::delete('/products/{product}/delete', [ProductController::class, 'delete']
 // Task 2
 
 Route::get('/products', [ProductController::class, 'search'])->name('products.index');  // route to search products.
+
+// Task 3
+
+Route::resource('categories', CategoryController::class);

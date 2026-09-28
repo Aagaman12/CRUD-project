@@ -112,7 +112,7 @@
                         href="{{ route('products.create') }}">
                         <span class="flex items-center gap-space-sm">
                             <span class="material-symbols-outlined">add</span>
-                            + Create New Product
+                            Create New Product
                         </span>
                         <span class="material-symbols-outlined text-base">arrow_forward</span>
                     </a>
@@ -122,8 +122,7 @@
         <!-- Quick Operational Overview Strip & Highlights -->
         <!-- Editorial Product Spotlight Teasers -->
     </div>
-    
-   
 
+    
 
 @endsection
