@@ -123,6 +123,6 @@
         <!-- Editorial Product Spotlight Teasers -->
     </div>
 
-    
+
 
 @endsection
