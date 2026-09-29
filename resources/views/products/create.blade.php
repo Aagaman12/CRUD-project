@@ -45,6 +45,20 @@
                     </div>
 
                     <div class="flex flex-col gap-space-xs">
+                        <label class="font-label-lg text-label-lg text-on-surface">Category</label>
+                        <select name="category_id"
+                            class="w-full appearance-none px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none focus:bg-surface-container-lowest shadow-inner transition-colors">
+                            <option value="" @selected(!old('category_id'))>Select a category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" @selected((int) old('category_id') === $category->id)>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @include('layouts.product-error', ['name' => 'category_id'])
+                    </div>
+
+                    <div class="flex flex-col gap-space-xs">
                         <label class="font-label-lg text-label-lg text-on-surface">SKU</label>
                         <input type="text" name="sku" value="{{ old('sku') }}" placeholder="e.g., TECH-ANC-002"
                             class="w-full uppercase px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md tracking-wider placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-inner transition-colors" />

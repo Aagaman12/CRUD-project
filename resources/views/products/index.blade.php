@@ -99,6 +99,7 @@
                                 <th class="py-space-md px-space-md min-w-[280px]">Description</th>
                                 <th class="py-space-md px-space-md text-right">Price</th>
                                 <th class="py-space-md px-space-md text-right">Quantity</th>
+                                <th class="py-space-md px-space-md">Category</th>
                                 <th class="py-space-md px-space-md text-center">Active Status</th>
                                 <th class="py-space-md px-space-md text-center">Actions</th>
                             </tr>
@@ -108,7 +109,8 @@
                                 <tr class="hover:bg-surface-container-low transition-colors">
                                     <td
                                         class="py-space-sm px-space-md font-label-md text-label-md font-medium text-on-surface-variant">
-                                        {{ $product->id }}</td>
+                                        {{ $product->id }}
+                                    </td>
                                     <td class="py-space-sm px-space-md">
                                         <div
                                             class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shadow-sm flex items-center justify-center">
@@ -119,17 +121,26 @@
                                         </div>
                                     </td>
                                     <td class="py-space-sm px-space-md font-medium text-on-surface whitespace-nowrap">
-                                        {{ $product->name }}</td>
+                                        {{ $product->name }}
+                                    </td>
                                     <td
                                         class="py-space-sm px-space-md font-label-sm text-label-sm font-semibold tracking-wide text-on-surface-variant whitespace-nowrap">
-                                        {{ $product->sku }}</td>
+                                        {{ $product->sku }}
+                                    </td>
                                     <td class="py-space-sm px-space-md text-on-surface-variant max-w-[220px]">
                                         <p class="line-clamp-2">{{ $product->description }}</p>
                                     </td>
                                     <td class="py-space-sm px-space-md text-right font-medium whitespace-nowrap">
-                                        {{ $product->price }}</td>
+                                        {{ $product->price }}
+                                    </td>
                                     <td class="py-space-sm px-space-md text-right font-medium whitespace-nowrap">
-                                        {{ $product->quantity }}</td>
+                                        {{ $product->quantity }}
+                                    </td>
+
+                                    <td class="py-space-sm px-space-md text-on-surface-variant whitespace-nowrap">
+                                        {{ $product->category->name ?? '—' }}
+                                    </td>
+                                    
                                     <td class="py-space-sm px-space-md text-center whitespace-nowrap">
                                         <span
                                             class="inline-flex items-center px-space-sm py-0.5 rounded-full text-xs font-medium {{ $product->is_active ? 'bg-surface-container-high text-on-surface' : 'bg-error-container/60 text-error' }}">

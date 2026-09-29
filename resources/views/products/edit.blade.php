@@ -45,6 +45,19 @@
                     </div>
 
                     <div class="flex flex-col gap-space-xs">
+                    <label class="font-label-lg text-label-lg text-on-surface">Category</label>
+                    <select name="category_id"
+                        class="w-full appearance-none px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none focus:bg-surface-container-lowest shadow-inner transition-colors">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" @selected((int) old('category_id', $product->category_id) === $category->id)>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @include('layouts.product-error', ['name' => 'category_id'])
+                </div>
+
+                    <div class="flex flex-col gap-space-xs">
                         <label class="font-label-lg text-label-lg text-on-surface">SKU</label>
                         <input type="text" name="sku" value="{{ old('sku', $product->sku) }}"
                             class="w-full uppercase px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md tracking-wider placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-inner transition-colors" />
@@ -111,19 +124,19 @@
                         class="relative rounded-xl bg-surface-container-low p-space-lg flex flex-col items-center justify-center text-center gap-space-sm">
                         <input type="file" name="image" accept="image/*" id="imageInput"
                             class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="
-                                   const file = this.files[0];
-                                   if (file) {
-                                       const reader = new FileReader();
-                                       reader.onload = function(e) {
-                                           const preview = document.getElementById('imgPreview');
-                                           const placeholder = document.getElementById('uploadPlaceholder');
-                                           preview.src = e.target.result;
-                                           preview.classList.remove('hidden');
-                                           placeholder.classList.add('hidden');
-                                       };
-                                       reader.readAsDataURL(file);
-                                   }
-                               " />
+                                       const file = this.files[0];
+                                       if (file) {
+                                           const reader = new FileReader();
+                                           reader.onload = function(e) {
+                                               const preview = document.getElementById('imgPreview');
+                                               const placeholder = document.getElementById('uploadPlaceholder');
+                                               preview.src = e.target.result;
+                                               preview.classList.remove('hidden');
+                                               placeholder.classList.add('hidden');
+                                           };
+                                           reader.readAsDataURL(file);
+                                       }
+                                   " />
                         <div id="uploadPlaceholder" class="flex flex-col items-center gap-space-xs">
                             <div
                                 class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center text-primary">

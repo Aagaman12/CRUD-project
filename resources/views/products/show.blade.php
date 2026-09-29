@@ -58,6 +58,8 @@
                     </h2>
                 </div>
 
+                <p>Category: {{ $product->category->name }}</p>
+
                 <!-- Price & Stock Highlights -->
                 <div class="grid grid-cols-2 gap-space-md">
                     <div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">

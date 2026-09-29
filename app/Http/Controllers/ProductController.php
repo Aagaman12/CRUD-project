@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,7 +23,9 @@ class ProductController extends Controller
 
     public function create(): View
     {
-        return view('products.create');
+        $categories = Category::orderBy('name')->get();
+
+        return view('products.create', compact('categories'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -34,6 +37,7 @@ class ProductController extends Controller
             'description' => 'nullable|string|max:500',                                             // validating the data.
             'price' => 'required|numeric|min:0|decimal:0,2',
             'quantity' => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         if ($request->hasFile('image')) {
@@ -54,7 +58,9 @@ class ProductController extends Controller
 
     public function edit(Product $product): View
     {
-        return view('products.edit', ['product' => $product]);
+        $categories = Category::orderBy('name')->get();
+
+        return view('products.edit', compact('product', 'categories'));
     }
 
     public function update(Product $product, Request $request): RedirectResponse
@@ -66,6 +72,7 @@ class ProductController extends Controller
             'description' => 'nullable|string|max:500',                                                 // validating the updated data.
             'price' => 'required|numeric|min:0|decimal:0,2',
             'quantity' => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         if ($request->hasFile('image')) {
