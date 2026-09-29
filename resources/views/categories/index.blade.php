@@ -3,6 +3,7 @@
 
 @section('content')
    <div class="max-w-7xl mx-auto px-margin py-space-lg">
+    
 
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
             <div>
@@ -19,6 +20,11 @@
                 <span>CREATE A CATEGORY</span>
             </a>
         </div>
+        @if(session('error'))
+            <div class="mb-space-md rounded-lg bg-red-50 px-space-md py-space-sm text-red-700">
+                {{ session('error') }}
+            </div>
+        @endif
 
         @if(session()->has('success'))
             <div

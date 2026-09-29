@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -60,8 +61,16 @@ class CategoryController extends Controller
     public function destroy(Category $category): RedirectResponse
     {
 
-        $category->delete();
+        try {
+            $category->delete();
 
-        return redirect(route('categories.index'))->with('success', 'Category deleted successfully');
+            return redirect()
+                ->route('categories.index')
+                ->with('success', 'Category deleted successfully.');
+        } catch (QueryException) {
+            return redirect()
+                ->route('categories.index')
+                ->with('error', 'This category cannot be deleted because it has products.');
+        }
     }
 }

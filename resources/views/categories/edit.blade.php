@@ -37,7 +37,7 @@
 
                     <div class="flex flex-col gap-space-xs">
                         <label class="font-label-lg text-label-lg text-on-surface">Category Name</label>
-                        <input type="text" name="name" value="{{ old('name', $category->name) }}" 
+                        <input type="text" name="name" value="{{ old('name', $category->name) }}" readonly 
                             class="w-full px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-inner transition-colors" />
                         @include('layouts.product-error', ['name' => 'name'])
                     </div>
