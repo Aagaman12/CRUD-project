@@ -18,16 +18,19 @@
                     </span>
                 @endunless
 
-                @unless(request()->routeIs('products.create'))
-                    <a href="{{ route('products.create') }}"
+
+                @unless(request()->routeIs('categories.index'))
+                    <a href="{{ route('categories.index') }}"
                        class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors">
-                        Create a Product
+                        Category
                     </a>
                 @else
                     <span class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg bg-primary-container text-on-primary shadow-sm">
-                        Create a Product
+                        Category
                     </span>
                 @endunless
+
+                
             </nav>
         </div>
 
