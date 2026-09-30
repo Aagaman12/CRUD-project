@@ -38,7 +38,19 @@
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search for product."
                             class="w-full bg-surface-container-low pl-9 pr-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest transition-colors" />
                     </div>
-
+                    <div class="flex items-center gap-space-xs min-w-[130px]">
+                        <div class="relative w-full">
+                            <select name="category"
+                                class="w-full appearance-none bg-surface-container-low px-space-md py-space-sm pr-8 rounded-lg font-label-md text-label-md text-on-surface focus:outline-none focus:bg-surface-container-lowest cursor-pointer">
+                                <option value="" @selected(!request('category'))>All Categories</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" @selected((string) request('category') === (string) $category->id)>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="flex items-center gap-space-xs min-w-[130px]">
                         <div class="relative w-full">
                             <select name="sort"
@@ -140,7 +152,7 @@
                                     <td class="py-space-sm px-space-md text-on-surface-variant whitespace-nowrap">
                                         {{ $product->category->name ?? '—' }}
                                     </td>
-                                    
+
                                     <td class="py-space-sm px-space-md text-center whitespace-nowrap">
                                         <span
                                             class="inline-flex items-center px-space-sm py-0.5 rounded-full text-xs font-medium {{ $product->is_active ? 'bg-surface-container-high text-on-surface' : 'bg-error-container/60 text-error' }}">

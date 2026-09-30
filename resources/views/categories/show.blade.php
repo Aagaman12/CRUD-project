@@ -3,7 +3,7 @@
 
 @section('content') <div class="max-w-7xl mx-auto px-margin py-space-lg"> <div class="flex flex-col w-full">
 
-```
+
         {{-- Header --}}
         <div class="flex flex-col gap-space-sm mb-space-lg">
             <div class="flex items-center gap-space-sm">
@@ -194,6 +194,6 @@
 
     </div>
 </div>
-```
+
 
 @endsection

@@ -14,13 +14,6 @@ class ProductController extends Controller
 {
     // Task 1
 
-    public function index(): View
-    {
-        $products = Product::all();
-
-        return view('products.index', ['products' => $products]);
-    }
-
     public function create(): View
     {
         $categories = Category::orderBy('name')->get();
@@ -105,12 +98,13 @@ class ProductController extends Controller
     {
         $search = $request->query('search');
         $status = $request->query('status');
+        $categoryId = $request->query('category');
 
         $allowedSorts = ['name', 'price', 'quantity', 'created_at'];
         $sort = $request->query('sort');
 
-        if (! in_array($sort, $allowedSorts)) {
-            $sort = 'id';
+        if (! in_array($sort, $allowedSorts, true)) {
+            $sort = 'name';
         }
 
         $direction = match ($request->query('direction')) {
@@ -119,6 +113,7 @@ class ProductController extends Controller
         };
 
         $products = Product::query()
+            ->with('category')
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
@@ -127,10 +122,13 @@ class ProductController extends Controller
             })
             ->when($status === 'active', fn ($query) => $query->where('is_active', true))
             ->when($status === 'inactive', fn ($query) => $query->where('is_active', false))
+            ->when($categoryId, fn ($query) => $query->where('category_id', $categoryId))
             ->orderBy($sort, $direction)
             ->paginate(10)
             ->withQueryString();
 
-        return view('products.index', compact('products'));
+        $categories = Category::orderBy('name')->get();
+
+        return view('products.index', compact('products', 'categories'));
     }
 }

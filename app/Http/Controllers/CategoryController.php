@@ -15,7 +15,7 @@ class CategoryController extends Controller
 
     public function index(): View
     {
-        $categories = Category::query()->orderBy('name')->paginate(10);
+        $categories = Category::query()->withCount('products')->orderBy('name')->paginate(10);
 
         return view('categories.index', ['categories' => $categories]);
     }

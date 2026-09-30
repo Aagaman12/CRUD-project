@@ -8,7 +8,6 @@ Route::inertia('/', 'Welcome')->name('home');
 
 // Task 1
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create'); // route to creating products data.
 
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');  // route to storing products data.

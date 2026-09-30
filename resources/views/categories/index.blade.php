@@ -42,6 +42,7 @@
                             <th class="py-space-md px-space-md">Id</th>
                             <th class="py-space-md px-space-md">Name</th>
                             <th class="py-space-md px-space-md">Description</th>
+                            <th class="py-space-md px-space-md text-center">Products</th>
                             <th class="py-space-md px-space-md text-center">Actions</th>
                         </tr>
                     </thead>
@@ -55,6 +56,7 @@
                                 <td class="py-space-sm px-space-md text-on-surface-variant max-w-md">
                                     <p class="line-clamp-2">{{ $category->description }}</p>
                                 </td>
+                                <td class="py-space-sm px-space-md text-center font-medium">{{ $category->products_count }}</td>
                                 <td class="py-space-sm px-space-md text-center whitespace-nowrap">
                                     <div class="inline-flex items-center gap-space-xs font-label-sm text-label-sm">
                                         <a href="{{ route('categories.show', $category) }}"
