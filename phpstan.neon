@@ -10,4 +10,7 @@ parameters:
         - database/
         - routes/
 
+    viewDirectories:
+        - resources/views
+
     level: 7

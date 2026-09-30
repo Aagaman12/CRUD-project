@@ -1,10 +1,16 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Welcome')->name('home');
+
+// Authentication
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.register');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.login');
 
 // Task 1
 
