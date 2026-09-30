@@ -132,6 +132,11 @@
             <div class="pt-space-md flex flex-wrap items-center justify-between gap-space-md">
                 <div class="flex items-center gap-space-sm">
                     <a class="px-space-lg py-space-sm rounded-lg bg-primary-container text-on-primary hover:bg-primary font-label-lg text-label-lg shadow-sm transition-all duration-150 inline-flex items-center gap-space-xs font-semibold"
+                       href="{{ url()->previous() }}">
+                        <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+                        <span>Return Back</span>
+                    </a>
+                    <a class="px-space-lg py-space-sm rounded-lg bg-primary-container text-on-primary hover:bg-primary font-label-lg text-label-lg shadow-sm transition-all duration-150 inline-flex items-center gap-space-xs font-semibold"
                        href="{{ route('products.edit', $product) }}">
                         <span class="material-symbols-outlined text-[20px]">edit</span>
                         <span>Edit Product</span>

@@ -168,7 +168,7 @@
                             <span class="material-symbols-outlined text-lg">check_circle</span>
                             Save &amp; Publish Product
                         </button>
-                        <a href="{{ route('products.index') }}"
+                        <a href="{{ url()->previous() }}"
                             class="w-full inline-flex items-center justify-center py-space-sm px-space-md rounded-lg font-label-lg text-label-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors">
                             Cancel and Return
                         </a>
