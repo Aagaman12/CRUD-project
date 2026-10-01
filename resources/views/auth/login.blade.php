@@ -8,6 +8,14 @@
 
     <h2>Log in</h2>
 
+    @if ($errors->any())
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+
 <label>
     Username
 </label>

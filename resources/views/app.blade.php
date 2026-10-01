@@ -21,7 +21,13 @@
                     <span class="font-label-md text-label-md text-on-surface-variant">Inventory Console</span>
                 </div>
                 <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">
-                    Welcome back, <span class="text-primary-container">Operator</span>
+                    Welcome,
+                    @guest
+                    <span class="text-primary-container"> Guest.</span>
+                    @else
+                    <span class="text-primary-container"> {{ auth()->user()->name }}.</span>
+                    
+                    @endguest
                 </h1>
                 <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
                     Manage your enterprise catalog seamlessly. What would you like to accomplish today?
@@ -35,9 +41,9 @@
                     <span class="font-headline-md text-headline-md text-on-surface">100% Synced</span>
                 </div>
                 <div
-                    class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container">
-                    <span class="material-symbols-outlined text-primary-container"
-                        style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    class="w-10 h-10 rounded-full flex items-center justify-center " style="background-color: #dcfce7;">
+                    <span class="material-symbols-outlined"
+                        style="font-variation-settings: 'FILL' 1; color: #16a34a;">check_circle</span>
                 </div>
             </div>
         </div>

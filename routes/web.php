@@ -15,6 +15,8 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 // Task 1
 
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create'); // route to creating products data.
