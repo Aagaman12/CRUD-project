@@ -34,11 +34,26 @@
             </nav>
         </div>
 
-        <div class="flex items-center gap-space-md">
-            <div class="flex items-center gap-space-sm pl-space-sm">
-                <span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
-                <span class="hidden md:inline-block font-label-md text-label-md text-on-surface font-medium">Operator</span>
-            </div>
+       
+
+        <div class="flex items-center gap-space-sm">
+            @guest
+                <a href="{{ route('show.login') }}"
+                   class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors">
+                    Login
+                </a>
+                <a href="{{ route('show.register') }}"
+                   class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg bg-primary-container text-on-primary shadow-sm hover:bg-primary transition-colors">
+                    Register
+                </a>
+            @else
+                <div class="flex items-center gap-space-sm pl-space-sm">
+                    <span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+                    <span class="hidden md:inline-block font-label-md text-label-md text-on-surface font-medium">
+                        {{ auth()->user()->name }}
+                    </span>
+                </div>
+            @endguest
         </div>
     </div>
 </header>
