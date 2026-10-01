@@ -11,6 +11,7 @@
             </div>
 
             <nav class="flex items-center gap-space-xs">
+                
                 @unless(request()->routeIs('products.index'))
                     <a href="{{ route('products.index') }}"
                         class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors">
@@ -35,7 +36,7 @@
                         Category
                     </span>
                 @endunless
-
+                
 
             </nav>
         </div>

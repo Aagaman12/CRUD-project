@@ -9,32 +9,39 @@ Route::inertia('/', 'Welcome')->name('home');
 
 // Authentication
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
-Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
+Route::middleware('guest')->group(function () {
 
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
+
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+});
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Task 1
+Route::middleware('auth')->group(function () {
 
-Route::get('/products/create', [ProductController::class, 'create'])->name('products.create'); // route to creating products data.
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create'); // route to creating products data.
 
-Route::post('/products', [ProductController::class, 'store'])->name('products.store');  // route to storing products data.
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');  // route to storing products data.
 
-Route::get('/products/{product}/show', [ProductController::class, 'show'])->name('products.show'); // route to show individual product details.
+    Route::get('/products/{product}/show', [ProductController::class, 'show'])->name('products.show'); // route to show individual product details.
 
-Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');    // route to edit product data.
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');    // route to edit product data.
 
-Route::put('/products/{product}/update', [ProductController::class, 'update'])->name('products.update');  // route to update product data.
+    Route::put('/products/{product}/update', [ProductController::class, 'update'])->name('products.update');  // route to update product data.
 
-Route::delete('/products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');  // route to delete product data.
+    Route::delete('/products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');  // route to delete product data.
 
-// Task 2
+    // Task 2
 
-Route::get('/products', [ProductController::class, 'search'])->name('products.index');  // route to search products.
+    Route::get('/products', [ProductController::class, 'search'])->name('products.index');  // route to search products.
 
-// Task 3
+    // Task 3
 
-Route::resource('categories', CategoryController::class);
+    Route::resource('categories', CategoryController::class);
+
+});

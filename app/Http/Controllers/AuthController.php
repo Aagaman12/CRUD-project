@@ -56,6 +56,6 @@ class AuthController extends Controller
         $request->session()->invalidate(); // Removes all the data related with the session.
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }
