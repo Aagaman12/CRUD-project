@@ -26,26 +26,39 @@
 
         <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden mb-space-md">
             <div class="overflow-x-auto">
-                <table class="w-full text-left font-body-md text-body-md">
+                <table class="w-full text-center font-body-md text-body-md">
                     <thead>
                         <tr
-                            class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+                            class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
                             <th class="py-space-md px-space-md">Id</th>
                             <th class="py-space-md px-space-md">Name</th>
+                            <th class="py-space-md px-space-md">Actions</th>
 
                         </tr>
                     </thead>
-                    <tbody class="text-on-surface divide-y divide-surface-variant/20">
+                    <tbody class="text-on-surface divide-y divide-surface-variant/20 ">
                         @forelse ($permissions as $permission)
-                            <tr class="hover:bg-surface-container-low transition-colors">
+                            <tr class="hover:bg-surface-container-low transition-colors ">
                                 <td
                                     class="py-space-sm px-space-md font-label-md text-label-md font-medium text-on-surface-variant">
                                     {{ $permission->id }}
                                 </td>
                                 <td class="py-space-sm px-space-md font-medium">{{ $permission->name }}</td>
 
-
-
+                                <td class="py-space-sm px-space-md text-center whitespace-nowrap">
+                                    <div class="inline-flex items-center gap-space-xs font-label-sm text-label-sm">
+                                        <a href="{{ route('permissions.edit', $permission) }}"
+                                            class="text-on-surface-variant hover:text-on-surface px-1 py-0.5">Edit</a>
+                                        <span class="text-surface-container-highest">/</span>
+                                        <form method="post" action="{{ route('permissions.destroy', $permission) }}"
+                                            class="inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit"
+                                                class="text-primary-container hover:text-red-600 px-1 py-0.5 cursor-pointer">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
 
 
                             </tr>
@@ -58,7 +71,7 @@
                 </table>
             </div>
         </div>
-
+        <div>{{ $permissions->links() }}</div>
     </div>
 
 @endsection
