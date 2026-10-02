@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Welcome')->name('home');
@@ -31,6 +32,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/permissions/{permission}/edit', [PermissionController::class, 'edit'])->name('permissions.edit');
     Route::put('/permissions/{permission}/update', [PermissionController::class, 'update'])->name('permissions.update');
     Route::delete('/permissions/{permission}/delete', [PermissionController::class, 'destroy'])->name('permissions.destroy');
+
+    // Roles route
+    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+    Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::put('/roles/{role}/update', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/roles/{role}/delete', [RoleController::class, 'destroy'])->name('roles.destroy');
 
     // Task 1
 

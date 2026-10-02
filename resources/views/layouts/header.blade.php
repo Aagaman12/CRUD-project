@@ -49,6 +49,18 @@
                     </span>
                 @endunless
 
+                @unless(request()->routeIs('roles.index'))
+                    <a href="{{ route('roles.index') }}"
+                        class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors">
+                        Roles
+                    </a>
+                @else
+                    <span
+                        class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg bg-primary-container text-on-primary shadow-sm">
+                        Roles
+                    </span>
+                @endunless
+
             </nav>
         </div>
 

@@ -10,15 +10,15 @@
             <div>
                 <div class="flex items-center gap-space-xs mb-1">
                     <span class="w-2 h-2 rounded-full bg-primary-container"></span>
-                    <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Permission
+                    <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Roles
                         System</span>
                 </div>
-                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Permissions</h1>
+                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Roles</h1>
             </div>
-            <a href="{{ route('permissions.create') }}"
+            <a href="{{ route('roles.create') }}"
                 class="inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary px-space-lg py-space-sm rounded-lg font-label-lg text-label-lg shadow-sm hover:bg-secondary transition-all active:scale-[0.98]">
                 <span class="material-symbols-outlined text-lg">add</span>
-                <span>CREATE A Permission</span>
+                <span>CREATE A ROLE</span>
             </a>
         </div>
 
@@ -32,33 +32,36 @@
                             class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
                             <th class="py-space-md px-space-md">Id</th>
                             <th class="py-space-md px-space-md">Name</th>
+                            <th class="py-space-md px-space-md">Permissions</th>
                             <th class="py-space-md px-space-md">Actions</th>
 
                         </tr>
                     </thead>
                     <tbody class="text-on-surface divide-y divide-surface-variant/20 ">
-                        @forelse ($permissions as $permission)
+                        @forelse ($roles as $role)
                             <tr class="hover:bg-surface-container-low transition-colors ">
                                 <td
                                     class="py-space-sm px-space-md font-label-md text-label-md font-medium text-on-surface-variant">
-                                    {{ $permission->id }}
+                                    {{ $role->id }}
                                 </td>
-                                <td class="py-space-sm px-space-md font-medium">{{ $permission->name }}</td>
+                                <td class="py-space-sm px-space-md font-medium">{{ $role->name }}</td>
+                                <td class="py-space-sm px-space-md font-medium">
+                                    {{ $role->permissions->pluck('name')->implode(', ') }}</td>
 
                                 <td class="py-space-sm px-space-md text-center whitespace-nowrap">
                                     <div class="inline-flex items-center gap-space-xs font-label-sm text-label-sm">
-                                        <a href="{{ route('permissions.edit', $permission) }}"
+                                        <a href="{{ route('roles.edit', $role) }}"
                                             class="text-on-surface-variant hover:text-on-surface px-1 py-0.5">Edit</a>
                                         <span class="text-surface-container-highest">/</span>
-                                        <form method="post" action="{{ route('permissions.destroy', $permission) }}"
+                                        <form method="post" action="{{ route('roles.destroy', $role) }}"
                                             class="inline">
                                             @csrf
                                             @method('delete')
                                             <button type="submit"
                                                 class="text-primary-container hover:text-red-600 px-1 py-0.5 cursor-pointer">Delete</button>
                                         </form>
-                                    </div>
                                 </td>
+
 
 
                             </tr>
@@ -71,7 +74,7 @@
                 </table>
             </div>
         </div>
-        <div>{{ $permissions->links() }}</div>
+        <div>{{ $roles->links() }}</div>
     </div>
 
 @endsection
