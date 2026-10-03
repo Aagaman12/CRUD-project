@@ -6,12 +6,20 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
-class ProductController extends Controller
+class ProductController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:manage', only: ['edit', 'create', 'destroy']),
+        ];
+    }
     // Task 1
 
     public function create(): View

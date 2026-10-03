@@ -94,7 +94,7 @@
             </div>
 
             <!-- Card 2: View Category Index -->
-
+            @can('manage')
             <div
                 class="group relative bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200">
                 <div class="flex flex-col gap-space-md">
@@ -125,7 +125,9 @@
                     </a>
                 </div>
             </div>
+            @endcan
 
+            @can('view')
             <div
                 class="group relative bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200">
                 <div class="flex flex-col gap-space-md">
@@ -157,6 +159,9 @@
                     </a>
                 </div>
             </div>
+            @endcan
+
+            @can('manage')
             <!-- Card 4: View Category-->
             <div
                 class="group relative bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200">
@@ -190,6 +195,7 @@
                     </a>
                 </div>
             </div>
+            @endcan
         </div>
         <!-- Quick Operational Overview Strip & Highlights -->
         <!-- Editorial Product Spotlight Teasers -->

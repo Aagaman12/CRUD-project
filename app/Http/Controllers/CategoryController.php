@@ -6,11 +6,19 @@ use App\Models\Category;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
-class CategoryController extends Controller
+class CategoryController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view', only: ['index', 'edit', 'create', 'destroy']),
+        ];
+    }
     // Task 3
 
     public function index(): View

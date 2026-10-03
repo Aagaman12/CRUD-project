@@ -12,7 +12,7 @@
                     class="flex items-center gap-space-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
                     <a href="{{ route('roles.index') }}" class="hover:text-primary transition-colors">Roles</a>
                     <span class="text-outline">/</span>
-                    <span class="text-primary font-semibold">New Role</span>
+                    <span class="text-primary font-semibold">Update Role</span>
                 </nav>
                 <div class="flex items-center gap-space-sm">
                     <a href="{{ route('roles.index') }}" title="Back to Roles"
