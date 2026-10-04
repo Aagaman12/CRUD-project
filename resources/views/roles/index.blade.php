@@ -13,7 +13,7 @@
                     <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Roles
                         System</span>
                 </div>
-                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Roles</h1>
+                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Roles (Admin, Staff and Super Admin)</h1>
             </div>
             <a href="{{ route('roles.create') }}"
                 class="inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary px-space-lg py-space-sm rounded-lg font-label-lg text-label-lg shadow-sm hover:bg-secondary transition-all active:scale-[0.98]">

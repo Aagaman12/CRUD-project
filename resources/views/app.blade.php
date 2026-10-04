@@ -53,7 +53,7 @@
                 <span
                     class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container font-semibold">Immediate
                     Dispatch</span>
-                <h2 class="font-headline-lg text-headline-lg text-on-surface">Do you want to view or create new products or categories?</h2>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">Do you want to view available products?</h2>
             </div>
             <div class="font-body-md text-body-md text-on-surface-variant">
                 Select a pathway below to proceed to your inventory flow.

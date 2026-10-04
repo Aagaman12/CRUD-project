@@ -13,7 +13,7 @@
                     <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">User
                         System</span>
                 </div>
-                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Users</h1>
+                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Users (Assign roles to users)</h1>
             </div>
             
         </div>
