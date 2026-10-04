@@ -4,22 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
-class ProductController extends Controller implements HasMiddleware
+class ProductController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('permission:manage', only: ['edit', 'create', 'destroy']),
-        ];
-    }
+    use AuthorizesRequests;
+
     // Task 1
 
     public function create(): View
@@ -47,6 +42,8 @@ class ProductController extends Controller implements HasMiddleware
 
         $data['is_active'] = $request->boolean('is_active');
 
+        $data['user_id'] = auth()->id();
+
         Product::create($data);         // stores our data into database.
 
         return redirect(route('products.index'))->with('success', 'Product Created Successfully.');  // after storing redirects to index page.
@@ -59,6 +56,7 @@ class ProductController extends Controller implements HasMiddleware
 
     public function edit(Product $product): View
     {
+        $this->authorize('update', $product);
         $categories = Category::orderBy('name')->get();
 
         return view('products.edit', compact('product', 'categories'));
@@ -66,6 +64,7 @@ class ProductController extends Controller implements HasMiddleware
 
     public function update(Product $product, Request $request): RedirectResponse
     {
+        $this->authorize('update', $product);
         $data = $request->validate([
             'image' => 'nullable|image|max:2048',
             'name' => 'required|string|max:100',
@@ -92,6 +91,7 @@ class ProductController extends Controller implements HasMiddleware
 
     public function delete(Product $product): RedirectResponse
     {
+        $this->authorize('delete', $product);
         if ($product->image) {
             Storage::disk('public')->delete($product->image);
         }

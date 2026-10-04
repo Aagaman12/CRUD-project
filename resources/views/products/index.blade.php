@@ -14,13 +14,13 @@
                     </div>
                     <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Product Index</h1>
                 </div>
-                @can('view')
+                
                 <a href="{{ route('products.create') }}"
                     class="inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary px-space-lg py-space-sm rounded-lg font-label-lg text-label-lg shadow-sm hover:bg-secondary transition-all active:scale-[0.98]">
                     <span class="material-symbols-outlined text-lg">add</span>
                     <span>CREATE A PRODUCT</span>
                 </a>
-                @endcan
+               
             </div>
 
             @if(session()->has('success'))
@@ -165,12 +165,14 @@
                                         <div class="inline-flex items-center gap-space-xs font-label-sm text-label-sm">
                                             <a href="{{ route('products.show', $product) }}"
                                                 class="text-tertiary hover:underline px-1 py-0.5">Show</a>
-                                                @can('view')
+                                                @can('update', $product)
                                             <span class="text-surface-container-highest">/</span>
                                             <a href="{{ route('products.edit', $product) }}"
                                                 class="text-on-surface-variant hover:text-on-surface px-1 py-0.5">Edit</a>
+                                                @endcan
+                                                @can('delete', $product)
                                             <span class="text-surface-container-highest">/</span>
-                                            <form method="post" action="{{ route('products.delete', $product) }}"
+                                            <form method="post" action="{{ route('products.delete', $product) }}" 
                                                 class="inline">
                                                 @csrf
                                                 @method('delete')

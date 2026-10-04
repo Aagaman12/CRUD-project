@@ -15,6 +15,7 @@ class Product extends Model
         'price',
         'quantity',
         'category_id',
+        'user_id',
         'is_active',
     ];
 
@@ -24,5 +25,13 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
