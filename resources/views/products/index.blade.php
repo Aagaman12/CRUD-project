@@ -172,7 +172,7 @@
                                                 @endcan
                                                 @can('delete', $product)
                                             <span class="text-surface-container-highest">/</span>
-                                            <form method="post" action="{{ route('products.delete', $product) }}" 
+                                            <form method="post" action="{{ route('products.delete', $product) }}"  onsubmit="return confirm('Are you sure you want to delete {{ $product->name }}?');"
                                                 class="inline">
                                                 @csrf
                                                 @method('delete')

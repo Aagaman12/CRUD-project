@@ -50,7 +50,7 @@
                                         <a href="{{ route('permissions.edit', $permission) }}"
                                             class="text-on-surface-variant hover:text-on-surface px-1 py-0.5">Edit</a>
                                         <span class="text-surface-container-highest">/</span>
-                                        <form method="post" action="{{ route('permissions.destroy', $permission) }}" 
+                                        <form method="post" action="{{ route('permissions.destroy', $permission) }}"  onsubmit="return confirm('Are you sure you want to delete {{ $permission->name }}?');"
                                             class="inline">
                                             @csrf
                                             @method('delete')

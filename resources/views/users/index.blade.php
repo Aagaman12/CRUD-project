@@ -53,7 +53,7 @@
                                         <a href="{{ route('users.edit', $user) }}"
                                             class="text-on-surface-variant hover:text-on-surface px-1 py-0.5">Edit</a>
                                         <span class="text-surface-container-highest">/</span>
-                                        <form method="post" action="{{ route('users.destroy', $user) }}" 
+                                        <form method="post" action="{{ route('users.destroy', $user) }}"   onsubmit="return confirm('Are you sure you want to delete {{ $user->name }}?');"
                                             class="inline">
                                             @csrf
                                             @method('delete')

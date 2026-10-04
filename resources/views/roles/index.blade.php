@@ -53,7 +53,7 @@
                                         <a href="{{ route('roles.edit', $role) }}"
                                             class="text-on-surface-variant hover:text-on-surface px-1 py-0.5">Edit</a>
                                         <span class="text-surface-container-highest">/</span>
-                                        <form method="post" action="{{ route('roles.destroy', $role) }}"
+                                        <form method="post" action="{{ route('roles.destroy', $role) }}"  onsubmit="return confirm('Are you sure you want to delete {{ $role->name }}?');"
                                             class="inline">
                                             @csrf
                                             @method('delete')
