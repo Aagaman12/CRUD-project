@@ -12,9 +12,13 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $users = User::query()->latest()->paginate(10);
+        if ($request->deleted == 1) {
+            $users = User::onlyTrashed()->latest()->paginate(10);
+        } else {
+            $users = User::query()->latest()->paginate(10);
+        }
 
         return view('users.index', ['users' => $users]);
     }
@@ -65,5 +69,15 @@ class UserController extends Controller
                 ->route('users.index')
                 ->with('error', 'This User cannot be deleted.');
         }
+    }
+
+    public function restore(int $user): RedirectResponse
+    {
+        $user = User::onlyTrashed()->findOrFail($user);
+        $user->restore();
+
+        return redirect()
+            ->route('users.index')
+            ->with('success', 'User restored successfully.');
     }
 }

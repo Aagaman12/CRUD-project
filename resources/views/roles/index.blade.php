@@ -13,7 +13,8 @@
                     <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Roles
                         System</span>
                 </div>
-                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Roles (Admin, Customer and Super Admin)</h1>
+                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Roles (Admin, Customer and Super
+                    Admin)</h1>
             </div>
             <a href="{{ route('roles.create') }}"
                 class="inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary px-space-lg py-space-sm rounded-lg font-label-lg text-label-lg shadow-sm hover:bg-secondary transition-all active:scale-[0.98]">
@@ -46,21 +47,25 @@
                                 </td>
                                 <td class="py-space-sm px-space-md font-medium">{{ $role->name }}</td>
                                 <td class="py-space-sm px-space-md font-medium">
-                                    {{ $role->permissions->pluck('name')->implode(', ') }}</td>
+                                    {{ $role->permissions->pluck('name')->implode(', ') }}
+                                </td>
 
                                 <td class="py-space-sm px-space-md text-center whitespace-nowrap">
                                     <div class="inline-flex items-center gap-space-xs font-label-sm text-label-sm">
                                         <a href="{{ route('roles.edit', $role) }}"
                                             class="text-on-surface-variant hover:text-on-surface px-1 py-0.5">Edit</a>
                                         <span class="text-surface-container-highest">/</span>
-                                        <form method="post" action="{{ route('roles.destroy', $role) }}"  onsubmit="return confirm('Are you sure you want to delete {{ $role->name }}?');"
+                                        <form method="post" action="{{ route('roles.destroy', $role) }}"
+                                            onsubmit="return confirm('Are you sure you want to delete {{ $role->name }}?');"
                                             class="inline">
                                             @csrf
                                             @method('delete')
                                             <button type="submit"
                                                 class="text-primary-container hover:text-red-600 px-1 py-0.5 cursor-pointer">Delete</button>
                                         </form>
+                                    </div>
                                 </td>
+                                
 
 
 
