@@ -40,6 +40,13 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'password' => 'required|string',
         ]);
+        $userExists = User::where('name', $validated['name'])->exists();
+
+        if (! $userExists) {
+            throw ValidationException::withMessages([
+                'name' => 'User does not exist.',
+            ]);
+        }
         if (Auth::attempt($validated)) {
             $request->session()->regenerate(); // Secure environment for the authenticated user.
 
