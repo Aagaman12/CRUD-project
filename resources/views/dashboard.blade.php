@@ -20,14 +20,9 @@
                     <span class="text-on-surface-variant/40 font-label-md text-label-md">/</span>
                     <span class="font-label-md text-label-md text-on-surface-variant">Inventory Console</span>
                 </div>
-                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">
+                 <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">
                     Welcome,
-                    @guest
-                    <span class="text-primary-container"> Guest.</span>
-                    @else
                     <span class="text-primary-container"> {{ auth()->user()->name }}.</span>
-                    
-                    @endguest
                 </h1>
                 <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
                     Manage your enterprise catalog seamlessly. What would you like to accomplish today?

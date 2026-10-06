@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.public')
 @section('title', 'Login Page')
 
 @section('content')
+
 <div class="max-w-md mx-auto px-margin w-full py-space-xl">
 
     <div class="flex flex-col items-center gap-space-xs mb-space-lg text-center">
