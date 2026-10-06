@@ -38,10 +38,10 @@
                         <span>Explore Products</span>
                         <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                     </a>
-                    <a href="#how-it-works"
+                    <a href="#how-we-work"
                         class="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs px-space-lg h-12 rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container transition-all">
                         <span class="material-symbols-outlined text-[20px]">play_circle</span>
-                        <span>How It Works</span>
+                        <span>How We Work</span>
                     </a>
                 </div>
             </div>

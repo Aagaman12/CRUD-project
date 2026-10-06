@@ -14,7 +14,7 @@
 
             {{-- Filters --}}
             <form method="get" action="{{ route('public.shop') }}"
-                class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm mb-space-lg flex flex-wrap lg:flex-nowrap items-center gap-space-sm">
+                class="sticky top-20 z-40 bg-surface-container-lowest p-space-md rounded-xl shadow-md mb-space-lg flex flex-wrap lg:flex-nowrap items-center gap-space-sm">
 
                 <div class="relative flex-1 min-w-[220px]">
                     <span

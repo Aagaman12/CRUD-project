@@ -7,7 +7,7 @@
     <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md">
         <div class="flex flex-col gap-space-xs">
             <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Catalog SKU • {{ $product->sku }}</span>
-            <h1 class="font-headline-lg text-headline-lg text-on-surface">Product Details</h1>
+            <h1 class="font-headline-lg text-headline-lg text-on-surface">Shop For Products</h1>
         </div>
         <div class="flex items-center gap-space-sm self-start">
             @if($product->is_active)
