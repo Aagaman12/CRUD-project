@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
@@ -142,5 +144,53 @@ class ShopController extends Controller
         $product->delete();
 
         return redirect(route('public.dashboard.shop'))->with('success', 'Product deleted successfully');
+    }
+
+    public function addToCart(Request $request): RedirectResponse
+    {
+        $existingCart = Cart::where('user_id', Auth::id())
+            ->where('product_id', $request->product_id)
+            ->first();
+
+        if ($existingCart) {
+            return redirect()->back()->with('error', 'Product is already in your cart.');
+        }
+
+        $cart = new Cart;
+        $cart->user_id = Auth::user()->id;
+        $cart->product_id = $request->product_id;
+        $cart->save();
+
+        return redirect()->back()->with('success', 'Product added to cart successfully.');
+    }
+
+    public function cart(): View
+    {
+        $cartItems = Cart::where('user_id', Auth::id())->get();
+
+        $items = $cartItems->map(function ($item) {
+            $product = Product::find($item->product_id);
+
+            return [
+                'product' => $product,
+                'subtotal' => $product->price,
+            ];
+        });
+
+        $total = $items->sum('subtotal');
+
+        return view('public.dashboard.cart', compact('items', 'total'));
+    }
+
+    public function removeFromCart(Product $product): RedirectResponse
+    {
+        Cart::where('user_id', Auth::id())
+            ->where('product_id', $product->id)
+            ->delete();
+
+        return redirect()->back()->with(
+            'success',
+            'Product removed from cart.'
+        );
     }
 }

@@ -4,6 +4,7 @@
 
 @section('content')
     <section class="w-full py-12 lg:py-16 bg-surface">
+        @include('layouts.session')
         <div class="max-w-[1360px] mx-auto px-5 md:px-margin">
 
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">

@@ -3,6 +3,7 @@
 
 @section('content')
     <div class="w-full bg-surface-container-lowest shadow-sm mb-space-lg">
+        
         <div
             class="max-w-7xl mx-auto px-margin py-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
             <div class="flex flex-col gap-space-xs">

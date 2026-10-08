@@ -87,5 +87,8 @@ Route::middleware('auth')->group(function () {
 
     // cart route
 
+    Route::post('add_to_cart', [ShopController::class, 'addToCart'])->name('public.dashboard.addToCart');
+    Route::get('/cart_list', [ShopController::class, 'cart'])->name('public.dashboard.cart');
+    Route::delete('/cart/remove/{product}', [ShopController::class, 'removeFromCart'])->name('cart.remove');
 }
 );

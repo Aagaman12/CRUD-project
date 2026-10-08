@@ -22,8 +22,7 @@
 
 
         {{-- Navigation --}}
-        <nav
-class="hidden lg:flex items-center justify-center gap-8 xl:gap-12
+        <nav class="hidden lg:flex items-center justify-center gap-8 xl:gap-12
            text-base font-medium text-on-surface-variant
            whitespace-nowrap z-50">
             <a href="{{ route('home') }}" class="font-semibold hover:text-secondary transition-colors">
@@ -42,7 +41,7 @@ class="hidden lg:flex items-center justify-center gap-8 xl:gap-12
                 Testimonials
             </a>
 
-           <a href="{{ route('home') }}#about-us" class="font-semibold hover:text-secondary transition-colors">
+            <a href="{{ route('home') }}#about-us" class="font-semibold hover:text-secondary transition-colors">
                 About Us
             </a>
 
@@ -92,7 +91,7 @@ class="hidden lg:flex items-center justify-center gap-8 xl:gap-12
                             class="block px-4 py-3 rounded-lg font-semibold hover:bg-surface-container transition-colors">
                             Testimonials
                         </a>
-                        
+
                         <a href="{{ route('home') }}#about-us"
                             class="block px-4 py-3 rounded-lg font-semibold hover:bg-surface-container transition-colors">
                             About Us
@@ -105,13 +104,32 @@ class="hidden lg:flex items-center justify-center gap-8 xl:gap-12
 
             {{-- Authentication --}}
             @auth
-                <a href=""><span class="material-symbols-outlined">shopping_cart</span></a>
                 <div class="flex items-center gap-space-sm pl-space-sm">
 
+                    {{-- Cart --}}
+                    <a href="{{ route('public.dashboard.cart') }}" class="relative flex items-center">
+
+                        <span class="material-symbols-outlined text-on-surface-variant">
+                            shopping_cart
+                        </span>
+                       
+
+                        @if ($cartCount > 0)
+                            <span
+                                class="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full bg-primary text-on-primary text-[10px] font-bold">
+                                {{ $cartCount }}
+                            </span>
+                        @endif
+
+                    </a>
+                    </a>
+
+                    {{-- Account --}}
                     <span class="material-symbols-outlined text-on-surface-variant">
                         account_circle
                     </span>
 
+                    {{-- User name --}}
                     <span class="hidden md:inline-block font-label-md text-label-md text-on-surface font-medium">
                         {{ auth()->user()->name }}
                         ({{ Auth::user()->roles->pluck('name')->implode(', ') }})
@@ -120,25 +138,25 @@ class="hidden lg:flex items-center justify-center gap-8 xl:gap-12
                 </div>
 
                 <a href="{{ route('dashboard') }}" class="sm:block px-space-lg py-space-sm rounded-xl
-                               font-label-md text-label-md
-                               bg-primary-container text-on-primary
-                               hover:bg-secondary transition-all">
+                                           font-label-md text-label-md
+                                           bg-primary-container text-on-primary
+                                           hover:bg-secondary transition-all">
                     Dashboard
                 </a>
 
             @else
 
                 <a href="{{ route('show.login') }}" class=" sm:block px-space-md py-space-sm rounded-xl
-                               text-base font-medium text-on-surface
-                               border border-outline-variant
-                               hover:bg-surface-container transition-all">
+                                           text-base font-medium text-on-surface
+                                           border border-outline-variant
+                                           hover:bg-surface-container transition-all">
                     Login
                 </a>
 
                 <a href="{{ route('show.register') }}" class=" sm:block px-space-lg py-space-sm rounded-xl
-                               text-base font-medium
-                               bg-primary-container text-on-primary
-                               hover:bg-secondary transition-all shadow-sm">
+                                           text-base font-medium
+                                           bg-primary-container text-on-primary
+                                           hover:bg-secondary transition-all shadow-sm">
                     Register
                 </a>
 

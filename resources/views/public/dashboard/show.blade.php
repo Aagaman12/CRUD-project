@@ -3,6 +3,8 @@
 @section('content')
 
     <div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md sm:p-space-xl flex flex-col gap-space-xl">
+        @include('layouts.session')
+
         <!-- Section Title & Status Header -->
         <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md">
             <div class="flex flex-col gap-space-xs">
@@ -130,8 +132,9 @@
                 <div class="pt-space-md relative -top-2">
 
                     {{-- Add to Cart --}}
-                    <form action="" method="get" class="mb-space-sm">
+                    <form action="{{ route('public.dashboard.addToCart') }}" method="POST" class="mb-space-sm">
                         @csrf
+                          <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                         <button type="submit" class="w-full sm:w-auto px-space-lg py-space-sm rounded-lg
                                    bg-primary-container text-on-primary

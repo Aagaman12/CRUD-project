@@ -100,3 +100,19 @@
     letter-spacing: 0.04em;
     font-weight: 600;
 }
+
+@keyframes fadeOut {
+    0%,
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.animate-fade-out {
+    animation: fadeOut 4s ease forwards;
+}
