@@ -1,3 +1,4 @@
+
 <footer class="w-full bg-surface-container-lowest border-t border-surface-container-high">
 
     <div class="max-w-[1360px] mx-auto px-5 md:px-margin py-12 sm:py-16">
@@ -44,7 +45,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('public.shop') }}"
+                        <a href="{{ route('public.dashboard.shop') }}"
                             class="hover:text-on-surface items-center transition-colors">
                             Products
                         </a>

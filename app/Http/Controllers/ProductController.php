@@ -46,7 +46,7 @@ class ProductController extends Controller
 
         Product::create($data);         // stores our data into database.
 
-        return redirect(route('products.index'))->with('success', 'Product Created Successfully.');  // after storing redirects to index page.
+        return redirect(route('public.dashboard.shop'))->with('success', 'Product Created Successfully.');  // after storing redirects to index page.
     }
 
     public function show(Product $product): View

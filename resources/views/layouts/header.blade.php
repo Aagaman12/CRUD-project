@@ -3,22 +3,31 @@
     <div class="h-16 max-w-7xl mx-auto px-margin flex items-center justify-between">
         <div class="flex items-center gap-space-lg">
 
-            <div class="flex items-center gap-space-sm">
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-space-sm">
-                    <span class="material-symbols-outlined text-primary-container text-2xl">inventory_2</span>
-                    <span class="font-headline-md text-headline-md tracking-tight text-on-surface">CRUD</span>
+            <div class="flex items-center justify-start">
+                <a href="{{ route('home') }}" class="flex items-center gap-space-sm">
+                    <span
+                        class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[20px]">
+                            storefront
+                        </span>
+                    </span>
+
+                    <span class="text-2xl font-bold tracking-tight text-on-surface">
+                        {{ config('app.name') }}
+                    </span>
                 </a>
+
             </div>
 
             <nav class="flex items-center gap-space-xs">
 
-                <a href="{{ route('home') }}"
-                        class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors">
-                        <span class="material-symbols-outlined" style="font-size: 18px;">
-                            home
-                        </span>
-                        <span>Home</span>
-                    </a>
+                <a href="{{ route('dashboard') }}"
+                    class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">
+                        home
+                    </span>
+                    <span>Home</span>
+                </a>
 
                 @unless(request()->routeIs('products.index'))
                     <a href="{{ route('products.index') }}"
@@ -32,19 +41,19 @@
                     </span>
                 @endunless
 
-                @can('view')
-                    @unless(request()->routeIs('categories.index'))
-                        <a href="{{ route('categories.index') }}"
-                            class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors">
-                            Category
-                        </a>
-                    @else
-                        <span
-                            class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg bg-primary-container text-on-primary shadow-sm">
-                            Category
-                        </span>
-                    @endunless
-                @endcan
+
+                @unless(request()->routeIs('categories.index'))
+                    <a href="{{ route('categories.index') }}"
+                        class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors">
+                        Category
+                    </a>
+                @else
+                    <span
+                        class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg bg-primary-container text-on-primary shadow-sm">
+                        Category
+                    </span>
+                @endunless
+
 
 
                 @unless(request()->routeIs('permissions.index'))
@@ -94,31 +103,31 @@
 
 
         <div class="flex items-center gap-space-sm">
-            
-                
 
-            
-                    <div class="flex items-center gap-space-sm pl-space-sm">
-                        <span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
-                        <span class="hidden md:inline-block font-label-md text-label-md text-on-surface font-medium">
-                            {{ auth()->user()->name }} ({{ Auth::user()->roles->pluck('name')->implode(', ')}})
-                        </span>
-                    </div>
-                    
 
-                    <div class="flex items-center pl-space-sm">
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
 
-                            <button type="submit" class="px-space-lg py-space-sm rounded-xl
+
+            <div class="flex items-center gap-space-sm pl-space-sm">
+                <span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+                <span class="hidden md:inline-block font-label-md text-label-md text-on-surface font-medium">
+                    {{ auth()->user()->name }} ({{ Auth::user()->roles->pluck('name')->implode(', ')}})
+                </span>
+            </div>
+
+
+            <div class="flex items-center pl-space-sm">
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+
+                    <button type="submit" class="px-space-lg py-space-sm rounded-xl
                                font-label-md text-label-md
                                bg-primary-container text-on-primary
                                hover:bg-secondary transition-all">
-                                Logout
-                            </button>
-                        </form>
-                    </div>
-            
+                        Logout
+                    </button>
+                </form>
+            </div>
+
 
         </div>
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', 'Dashboard')
 
 @section('content')
 
@@ -25,7 +25,7 @@
                     <span class="text-primary-container"> {{ auth()->user()->name }}.</span>
                 </h1>
                 <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-                    Manage your enterprise catalog seamlessly. What would you like to accomplish today?
+                    To the Admin pannel. Manage your enterprise catalog seamlessly. What would you like to accomplish today?
                 </p>
             </div>
             <div
@@ -48,7 +48,7 @@
                 <span
                     class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container font-semibold">Immediate
                     Dispatch</span>
-                <h2 class="font-headline-lg text-headline-lg text-on-surface">Do you want to view available products?</h2>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">Do you want to make changes in products?</h2>
             </div>
             <div class="font-body-md text-body-md text-on-surface-variant">
                 Select a pathway below to proceed to your inventory flow.
@@ -89,7 +89,7 @@
             </div>
 
             <!-- Card 2: View Category Index -->
-            @can('view')
+            
             <div
                 class="group relative bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200">
                 <div class="flex flex-col gap-space-md">
@@ -120,7 +120,7 @@
                     </a>
                 </div>
             </div>
-            @endcan
+            
 
             
             <div
@@ -156,7 +156,7 @@
             </div>
             
 
-            @can('view')
+            
             <!-- Card 4: View Category-->
             <div
                 class="group relative bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200">
@@ -190,7 +190,7 @@
                     </a>
                 </div>
             </div>
-            @endcan
+           
         </div>
         <!-- Quick Operational Overview Strip & Highlights -->
         <!-- Editorial Product Spotlight Teasers -->

@@ -11,8 +11,9 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/shop', [ShopController::class, 'index'])->name('public.shop');
-Route::get('/shop/{product}/show', [ShopController::class, 'show'])->name('public.show');
+Route::get('/shop', [ShopController::class, 'index'])->name('public.dashboard.shop');
+Route::get('/shop/{product}/show', [ShopController::class, 'show'])->name('public.dashboard.show');
+Route::get('/shop', [ShopController::class, 'search'])->name('public.dashboard.shop');  // route to search products.
 
 // Authentication
 
@@ -54,11 +55,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::patch('/users/{user}/restore', [UserController::class, 'restore'])->name('users.restore');
 
-    // Products route)
+    // Products route
 
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create'); // route to creating products data.
+    Route::get('/create', [ProductController::class, 'create'])->name('products.create'); // route to creating products data.
 
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');  // route to storing products data.
+    Route::post('/shop', [ProductController::class, 'store'])->name('products.store');  // route to storing products data.
 
     Route::get('/products/{product}/show', [ProductController::class, 'show'])->name('products.show'); // route to show individual product details.
 
@@ -67,6 +68,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/products/{product}/update', [ProductController::class, 'update'])->name('products.update');  // route to update product data.
 
     Route::delete('/products/{product}/delete', [ProductController::class, 'delete'])->name('products.delete');  // route to delete product data.
+
+    // Shop route
+
+    Route::get('/{product}/edit', [ShopController::class, 'edit'])->name('public.dashboard.edit');
+
+    Route::put('/{product}/update', [ShopController::class, 'update'])->name('public.update');  // route to update product data.
+
+    Route::delete('/{product}/delete', [ShopController::class, 'delete'])->name('public.delete');  // route to delete product data.
 
     // Search Route
 

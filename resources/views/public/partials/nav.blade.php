@@ -26,7 +26,7 @@
                 Home
             </a>
 
-            <a href="{{ route('home') }}#products"
+            <a href="{{ route('public.dashboard.shop') }}"
                 class="font-semibold hover:text-secondary transition-colors">
                 Products
             </a>

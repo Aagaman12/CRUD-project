@@ -106,7 +106,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="py-12 text-center text-on-surface-variant">No Permissions yet.</td>
+                                <td colspan="6" class="py-12 text-center text-on-surface-variant">No Deleted users yet.</td>
                             </tr>
                         @endforelse
                     </tbody>

@@ -31,7 +31,7 @@
     <div class="p-space-md flex flex-col flex-1 gap-space-xs">
         <span class="font-label-sm text-label-sm text-on-surface-variant">SKU: {{ $product->sku }}</span>
         <h3 class="text-lg font-semibold text-on-surface group-hover:text-secondary transition-colors">
-    <a href="{{ route('public.show', $product) }}" class="after:absolute after:inset-0">
+    <a href="{{ route('public.dashboard.show', $product) }}" class="after:absolute after:inset-0">
         {{ $product->name }}
     </a>
 </h3>

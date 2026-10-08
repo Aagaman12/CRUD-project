@@ -9,7 +9,7 @@
                     Our latest products, pulled straight from our inventory.
                 </p>
             </div>
-            <a href="{{ route('public.shop') }}"
+            <a href="{{ route('public.dashboard.shop') }}"
                 class="inline-flex items-center gap-space-xs text-base font-medium text-on-surface  hover:text-secondary transition-colors self-start md:self-auto">
                 <span>View All Products</span>
                 <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
@@ -18,12 +18,12 @@
 
         {{-- Category chips: each one opens the shop page filtered by that category --}}
         <div class="flex items-center gap-space-xs overflow-x-auto pb-space-sm mb-space-xl">
-            <a href="{{ route('public.shop') }}"
+            <a href="{{ route('public.dashboard.shop') }}"
                 class="px-space-md py-2 rounded-full text-base font-medium shrink-0 bg-primary-container text-on-primary shadow-sm">
                 All Products
             </a>
             @foreach ($categories as $category)
-                <a href="{{ route('public.shop', ['category' => $category->id]) }}"
+                <a href="{{ route('public.dashboard.shop', ['category' => $category->id]) }}"
                     class="px-space-md py-2 rounded-full text-base font-medium shrink-0 bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors">
                     {{ $category->name }}
                 </a>
@@ -39,5 +39,11 @@
                 </p>
             @endforelse
         </div>
+        <div class="flex justify-center mt-space-xl">
+    <a href="{{ route('public.dashboard.shop') }}"
+        class="px-space-lg py-3 rounded-full text-base font-medium bg-primary-container text-on-primary">
+        View more products
+    </a>
+</div>
     </div>
 </section>

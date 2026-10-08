@@ -15,11 +15,7 @@
                     <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Product Index</h1>
                 </div>
                 
-                <a href="{{ route('products.create') }}"
-                    class="inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary px-space-lg py-space-sm rounded-lg font-label-lg text-label-lg shadow-sm hover:bg-secondary transition-all active:scale-[0.98]">
-                    <span class="material-symbols-outlined text-lg">add</span>
-                    <span>CREATE A PRODUCT</span>
-                </a>
+                
                
             </div>
 

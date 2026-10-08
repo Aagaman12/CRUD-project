@@ -19,6 +19,6 @@ class HomeController extends Controller
             ->take(8)
             ->get();
 
-        return view('public.landing', compact('products', 'categories'));
+        return view('public.dashboard.landing', compact('products', 'categories'));
     }
 }

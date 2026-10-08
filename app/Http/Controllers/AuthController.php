@@ -50,7 +50,7 @@ class AuthController extends Controller
         if (Auth::attempt($validated)) {
             $request->session()->regenerate(); // Secure environment for the authenticated user.
 
-            return redirect()->route('home');
+            return redirect()->intended(route('home'));
         }
         throw ValidationException::withMessages([
             'credentials' => 'Sorry, Incorrect credentials',

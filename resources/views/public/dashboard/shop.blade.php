@@ -6,14 +6,26 @@
     <section class="w-full py-12 lg:py-16 bg-surface">
         <div class="max-w-[1360px] mx-auto px-5 md:px-margin">
 
-            <div class="mb-space-xl">
-                <span
-                    class="font-label-md text-label-md text-secondary font-semibold uppercase tracking-wider block mb-space-xs">Catalog</span>
-                <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">All Products</h1>
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+                <div>
+                    <div class="flex items-center gap-space-xs mb-1">
+                        <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                        <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Catalog
+                            </span>
+                    </div>
+                    <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Shop For Products</h1>
+                </div>
+                
+                <a href="{{ route('products.create') }}"
+                    class="inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary px-space-lg py-space-sm rounded-lg font-label-lg text-label-lg shadow-sm hover:bg-secondary transition-all active:scale-[0.98]">
+                    <span class="material-symbols-outlined text-lg">add</span>
+                    <span>Become a Seller</span>
+                </a>
+               
             </div>
 
             {{-- Filters --}}
-            <form method="get" action="{{ route('public.shop') }}"
+            <form method="get" action="{{ route('public.dashboard.shop') }}"
                 class="sticky top-20 z-40 bg-surface-container-lowest p-space-md rounded-xl shadow-md mb-space-lg flex flex-wrap lg:flex-nowrap items-center gap-space-sm">
 
                 <div class="relative flex-1 min-w-[220px]">
@@ -22,7 +34,9 @@
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search a Product..."
                         class="w-full bg-surface-container-low pl-9 pr-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest transition-colors">
                 </div>
-
+                
+                       
+                    
                 <select name="category"
                     class="min-w-[160px] bg-surface-container-low px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface focus:outline-none cursor-pointer">
                     <option value="">All Categories</option>
@@ -41,7 +55,7 @@
                 </button>
 
                 @if (request()->hasAny(['search', 'category', 'sort']))
-                    <a href="{{ route('public.shop') }}"
+                    <a href="{{ route('public.dashboard.shop') }}"
                         class="px-space-md py-space-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">
                         Reset
                     </a>
