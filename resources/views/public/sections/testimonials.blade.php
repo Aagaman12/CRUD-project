@@ -7,7 +7,7 @@
     ];
 @endphp
 
-<section id="testimonials" class="w-full py-16 lg:py-24 bg-surface-container-low scroll-mt-20">
+<section id="testimonials" class="w-full py-16 lg:py-24 bg-surface scroll-mt-20">
     <div class="max-w-[1360px] mx-auto px-5 md:px-margin">
 
         <div class="text-center max-w-2xl mx-auto mb-14">

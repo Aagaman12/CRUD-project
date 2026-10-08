@@ -6,7 +6,7 @@
     ];
 @endphp
 
-<section id="how-we-work" class="w-full py-16 lg:py-24 bg-surface-container-lowest scroll-mt-20">
+<section id="how-we-work" class="w-full py-16 lg:py-24 bg-surface scroll-mt-20">
     <div class="max-w-[1360px] mx-auto px-5 md:px-margin">
 
         <div class="text-center max-w-2xl mx-auto mb-14">
@@ -18,10 +18,10 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
             @foreach ($steps as $step)
                 <article
-                    class="group p-space-lg rounded-xl bg-surface-container-low transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    class="group p-space-lg rounded-xl bg-[#ffffff] transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div class="flex items-center justify-between mb-space-lg">
                         <div
-                            class="w-12 h-12 rounded-xl bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+                            class="w-12 h-12 rounded-xl text-on-surface flex items-center justify-center shadow-sm group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
                             <span class="material-symbols-outlined text-[24px]">{{ $step['icon'] }}</span>
                         </div>
                         <span class="font-label-md text-label-md px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-bold">

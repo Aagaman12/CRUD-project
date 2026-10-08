@@ -1,4 +1,7 @@
-<header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl border-b border-surface-container">
+<header id="navbar" class="fixed top-0 left-0 w-full z-50
+           bg-surface-container-lowest/90 backdrop-blur-xl
+           border-b border-surface-container
+           transition-transform duration-300">
     <div class="h-20 max-w-[1360px] mx-auto px-5 md:px-margin
                 grid grid-cols-2 lg:grid-cols-3 items-center">
 
@@ -19,26 +22,28 @@
 
 
         {{-- Navigation --}}
-        <nav class="hidden lg:flex items-center justify-center gap-12 text-base font-medium text-on-surface-variant whitespace-nowrap">
-
-            <a href="{{ route('home') }}"
-                class="font-semibold hover:text-secondary transition-colors">
+        <nav
+class="hidden lg:flex items-center justify-center gap-8 xl:gap-12
+           text-base font-medium text-on-surface-variant
+           whitespace-nowrap z-50">
+            <a href="{{ route('home') }}" class="font-semibold hover:text-secondary transition-colors">
                 Home
             </a>
 
-            <a href="{{ route('public.dashboard.shop') }}"
-                class="font-semibold hover:text-secondary transition-colors">
+            <a href="{{ route('public.dashboard.shop') }}" class="font-semibold hover:text-secondary transition-colors">
                 Products
             </a>
 
-            <a href="{{ route('home') }}#how-we-work"
-                class="font-semibold hover:text-secondary transition-colors">
+            <a href="{{ route('home') }}#how-we-work" class="font-semibold hover:text-secondary transition-colors">
                 How We Work
             </a>
 
-            <a href="{{ route('home') }}#testimonials"
-                class="font-semibold hover:text-secondary transition-colors">
+            <a href="{{ route('home') }}#testimonials" class="font-semibold hover:text-secondary transition-colors">
                 Testimonials
+            </a>
+
+           <a href="{{ route('home') }}#about-us" class="font-semibold hover:text-secondary transition-colors">
+                About Us
             </a>
 
         </nav>
@@ -51,8 +56,7 @@
             <div class="lg:hidden">
                 <details class="relative">
 
-                    <summary
-                        class="list-none cursor-pointer flex items-center justify-center
+                    <summary class="list-none cursor-pointer flex items-center justify-center
                                w-10 h-10 rounded-lg
                                hover:bg-surface-container transition-colors">
 
@@ -63,8 +67,7 @@
                     </summary>
 
                     {{-- Mobile Menu --}}
-                    <div
-                        class="absolute right-0 top-12 w-52
+                    <div class="absolute right-0 top-12 w-52
                                bg-surface-container-lowest
                                rounded-xl shadow-lg
                                border border-outline-variant/20
@@ -89,7 +92,11 @@
                             class="block px-4 py-3 rounded-lg font-semibold hover:bg-surface-container transition-colors">
                             Testimonials
                         </a>
-
+                        
+                        <a href="{{ route('home') }}#about-us"
+                            class="block px-4 py-3 rounded-lg font-semibold hover:bg-surface-container transition-colors">
+                            About Us
+                        </a>
                     </div>
 
                 </details>
@@ -98,7 +105,7 @@
 
             {{-- Authentication --}}
             @auth
-
+                <a href=""><span class="material-symbols-outlined">shopping_cart</span></a>
                 <div class="flex items-center gap-space-sm pl-space-sm">
 
                     <span class="material-symbols-outlined text-on-surface-variant">
@@ -112,29 +119,26 @@
 
                 </div>
 
-                <a href="{{ route('dashboard') }}"
-                    class="sm:block px-space-lg py-space-sm rounded-xl
-                           font-label-md text-label-md
-                           bg-primary-container text-on-primary
-                           hover:bg-secondary transition-all">
+                <a href="{{ route('dashboard') }}" class="sm:block px-space-lg py-space-sm rounded-xl
+                               font-label-md text-label-md
+                               bg-primary-container text-on-primary
+                               hover:bg-secondary transition-all">
                     Dashboard
                 </a>
 
             @else
 
-                <a href="{{ route('show.login') }}"
-                    class=" sm:block px-space-md py-space-sm rounded-xl
-                           text-base font-medium text-on-surface
-                           border border-outline-variant
-                           hover:bg-surface-container transition-all">
+                <a href="{{ route('show.login') }}" class=" sm:block px-space-md py-space-sm rounded-xl
+                               text-base font-medium text-on-surface
+                               border border-outline-variant
+                               hover:bg-surface-container transition-all">
                     Login
                 </a>
 
-                <a href="{{ route('show.register') }}"
-                    class=" sm:block px-space-lg py-space-sm rounded-xl
-                           text-base font-medium
-                           bg-primary-container text-on-primary
-                           hover:bg-secondary transition-all shadow-sm">
+                <a href="{{ route('show.register') }}" class=" sm:block px-space-lg py-space-sm rounded-xl
+                               text-base font-medium
+                               bg-primary-container text-on-primary
+                               hover:bg-secondary transition-all shadow-sm">
                     Register
                 </a>
 
@@ -144,3 +148,42 @@
 
     </div>
 </header>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navbar = document.getElementById('navbar');
+        const searchBar = document.getElementById('search-bar');
+
+        if (!navbar || !searchBar) {
+            return;
+        }
+
+        let lastScroll = window.scrollY;
+
+        window.addEventListener('scroll', function () {
+            const currentScroll = window.scrollY;
+
+            // At the very top
+            if (currentScroll <= 10) {
+                navbar.classList.remove('-translate-y-full');
+                searchBar.style.top = '80px';
+
+                lastScroll = currentScroll;
+                return;
+            }
+
+            // Scrolling DOWN
+            if (currentScroll > lastScroll) {
+                navbar.classList.add('-translate-y-full');
+                searchBar.style.top = '0px';
+            }
+
+            // Scrolling UP
+            if (currentScroll < lastScroll) {
+                navbar.classList.remove('-translate-y-full');
+                searchBar.style.top = '80px';
+            }
+
+            lastScroll = currentScroll;
+        });
+    });
+</script>

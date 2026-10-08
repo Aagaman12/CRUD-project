@@ -65,6 +65,13 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="{{ route('home') }}#about-us"
+                            class="hover:text-on-surface items-center transition-colors">
+                            About Us
+                        </a>
+                    </li>
+
                 </ul>
 
             </div>

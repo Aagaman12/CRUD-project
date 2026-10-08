@@ -11,22 +11,25 @@
                     <div class="flex items-center gap-space-xs mb-1">
                         <span class="w-2 h-2 rounded-full bg-primary-container"></span>
                         <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Catalog
-                            </span>
+                        </span>
                     </div>
                     <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Shop For Products</h1>
                 </div>
-                
+
                 <a href="{{ route('products.create') }}"
                     class="inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary px-space-lg py-space-sm rounded-lg font-label-lg text-label-lg shadow-sm hover:bg-secondary transition-all active:scale-[0.98]">
                     <span class="material-symbols-outlined text-lg">add</span>
                     <span>Become a Seller</span>
                 </a>
-               
+
             </div>
 
             {{-- Filters --}}
-            <form method="get" action="{{ route('public.dashboard.shop') }}"
-                class="sticky top-20 z-40 bg-surface-container-lowest p-space-md rounded-xl shadow-md mb-space-lg flex flex-wrap lg:flex-nowrap items-center gap-space-sm">
+            <form method="get" action="{{ route('public.dashboard.shop') }}" id="search-bar" class="sticky z-40
+               bg-surface-container-lowest
+               p-space-md rounded-xl shadow-md mb-space-lg
+               flex flex-wrap lg:flex-nowrap items-center gap-space-sm
+               transition-[top] duration-300" style="top: 80px;">
 
                 <div class="relative flex-1 min-w-[220px]">
                     <span
@@ -34,9 +37,9 @@
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search a Product..."
                         class="w-full bg-surface-container-low pl-9 pr-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest transition-colors">
                 </div>
-                
-                       
-                    
+
+
+
                 <select name="category"
                     class="min-w-[160px] bg-surface-container-low px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface focus:outline-none cursor-pointer">
                     <option value="">All Categories</option>
@@ -47,7 +50,7 @@
                     @endforeach
                 </select>
 
-                
+
 
                 <button type="submit"
                     class="px-space-lg py-space-sm rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-secondary transition-colors cursor-pointer">

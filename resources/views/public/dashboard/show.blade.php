@@ -127,39 +127,93 @@
 
                 <!-- Bottom Action Buttons Strip -->
 
+                <div class="pt-space-md relative -top-2">
+
+                    {{-- Add to Cart --}}
+                    <form action="" method="get" class="mb-space-sm">
+                        @csrf
+
+                        <button type="submit" class="w-full sm:w-auto px-space-lg py-space-sm rounded-lg
+                                   bg-primary-container text-on-primary
+                                   hover:bg-primary font-label-lg text-label-lg
+                                   shadow-sm transition-all duration-150
+                                   inline-flex items-center justify-center gap-space-xs
+                                   font-semibold">
+
+                            <span class="material-symbols-outlined">shopping_cart</span>
+
+                            <span>Add to Cart</span>
+                        </button>
+                    </form>
 
 
+                    {{-- Bottom Row --}}
+                    <div class="flex flex-wrap items-center justify-between gap-space-md">
 
-                <div class="pt-space-md flex flex-wrap items-center justify-between gap-space-md">
-                    <div class="flex items-center gap-space-sm">
-                        <a class="px-space-lg py-space-sm rounded-lg bg-primary-container text-on-primary hover:bg-primary font-label-lg text-label-lg shadow-sm transition-all duration-150 inline-flex items-center gap-space-xs font-semibold"
-                            href="{{ route('public.dashboard.shop') }}">
-                            <span class="material-symbols-outlined text-[20px]">arrow_back</span>
-                            <span>Return Back</span>
-                        </a>
-                        @can('update', $product)
-                                <a class="px-space-lg py-space-sm rounded-lg bg-primary-container text-on-primary hover:bg-primary font-label-lg text-label-lg shadow-sm transition-all duration-150 inline-flex items-center gap-space-xs font-semibold"
-                                    href="{{ route('public.dashboard.edit', $product) }}">
-                                    <span class="material-symbols-outlined text-[20px]">edit</span>
+                        <div class="flex flex-wrap items-center gap-space-md">
+
+                            {{-- Return Back --}}
+                            <a class="px-space-lg py-space-sm rounded-lg
+                                      bg-primary-container text-on-primary
+                                      hover:bg-primary font-label-lg text-label-lg
+                                      shadow-sm transition-all duration-150
+                                      inline-flex items-center gap-space-xs
+                                      font-semibold" href="{{ route('public.dashboard.shop') }}">
+
+                                <span class="material-symbols-outlined text-[20px]">
+                                    arrow_back
+                                </span>
+
+                                <span>Return Back</span>
+                            </a>
+
+
+                            {{-- Edit Product --}}
+                            @can('update', $product)
+                                <a class="px-space-lg py-space-sm rounded-lg
+                                                          bg-primary-container text-on-primary
+                                                          hover:bg-primary font-label-lg text-label-lg
+                                                          shadow-sm transition-all duration-150
+                                                          inline-flex items-center gap-space-xs
+                                                          font-semibold" href="{{ route('public.dashboard.edit', $product) }}">
+
+                                    <span class="material-symbols-outlined text-[20px]">
+                                        edit
+                                    </span>
+
                                     <span>Edit Product</span>
                                 </a>
+                            @endcan
 
-                            </div>
-                        @endcan
-                    @can('delete', $product)
-                        <div>
+                        </div>
+
+
+                        {{-- Delete --}}
+                        @can('delete', $product)
                             <form action="{{ route('public.delete', $product) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this product?');">
+
                                 @csrf
                                 @method('DELETE')
-                                <button
-                                    class="px-space-md py-space-sm rounded-lg bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-lg text-label-lg transition-colors inline-flex items-center gap-space-xs font-medium"
-                                    type="submit">
-                                    <span class="material-symbols-outlined text-[18px]">delete</span>
+
+                                <button class="px-space-md py-space-sm rounded-lg
+                                                           bg-error-container text-on-error-container
+                                                           hover:bg-error hover:text-on-error
+                                                           font-label-lg text-label-lg
+                                                           transition-colors
+                                                           inline-flex items-center gap-space-xs
+                                                           font-medium" type="submit">
+
+                                    <span class="material-symbols-outlined text-[18px]">
+                                        delete
+                                    </span>
+
                                     <span>Delete</span>
                                 </button>
+
                             </form>
-                    @endcan
+                        @endcan
+
                     </div>
 
                 </div>
